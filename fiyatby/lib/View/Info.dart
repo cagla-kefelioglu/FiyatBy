@@ -43,7 +43,7 @@ class _InfoState extends State<Info> {
               child: PageView.builder(
                 itemCount: demo_data.length,
                 controller: _pageController,
-                onPageChanged: (index){
+                onPageChanged: (index) {
                   setState(() {
                     _pageIndex = index;
                   });
@@ -60,7 +60,11 @@ class _InfoState extends State<Info> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ...List.generate(demo_data.length , (index)=>slider(isActive: index==_pageIndex,)),
+                  ...List.generate(
+                      demo_data.length,
+                      (index) => slider(
+                            isActive: index == _pageIndex,
+                          )),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -72,7 +76,10 @@ class _InfoState extends State<Info> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(140),
                                 gradient: LinearGradient(
-                                    colors: [Constant.greenOne, Constant.blueTwo],
+                                    colors: [
+                                      Constant.greenOne,
+                                      Constant.blueTwo
+                                    ],
                                     begin: Alignment.bottomLeft,
                                     end: Alignment.topRight)),
                             child: ElevatedButton(
@@ -80,7 +87,8 @@ class _InfoState extends State<Info> {
                                     elevation: 0,
                                     backgroundColor: Colors.transparent,
                                     shape: new RoundedRectangleBorder(
-                                      borderRadius: new BorderRadius.circular(150),
+                                      borderRadius:
+                                          new BorderRadius.circular(150),
                                     )),
                                 onPressed: () {
                                   /*Grock.toRemove(Login());*/
@@ -93,7 +101,10 @@ class _InfoState extends State<Info> {
                                 },
                                 child: Text(
                                   "Devam Et",
-                                  style:TextStyle(color: Constant.white,fontFamily: 'Poppins' , fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: Constant.white,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600),
                                 )),
                           ),
                         ),
@@ -123,7 +134,7 @@ class slider extends StatelessWidget {
       height: 10,
       width: isActive ? 30 : 10,
       decoration: BoxDecoration(
-          color:isActive ? Constant.greenOne : Constant.greenTwo,
+          color: isActive ? Constant.greenOne : Constant.greenTwo,
           borderRadius: BorderRadius.all(Radius.circular(12))),
     );
   }
@@ -155,9 +166,7 @@ class Component extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image.asset(
               images,
               fit: BoxFit.fill,
@@ -168,7 +177,9 @@ class Component extends StatelessWidget {
             Text(
               description,
               style: TextStyle(
-                  fontFamily: 'Poppins', fontSize: 25, fontWeight: FontWeight.w600),
+                  fontFamily: 'Poppins',
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600),
             )
           ]),
         ),

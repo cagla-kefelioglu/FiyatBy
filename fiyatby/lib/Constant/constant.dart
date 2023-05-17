@@ -12,5 +12,7 @@ class Constant {
   static const Color grey = Color(0xFFA2A2A2);
   static const Color dark = Color(0xFF000000);
   static const Color white = Color(0xFFffffff);
+  static const Color input = Color(0xFFF0F0F3);
+
 
 }

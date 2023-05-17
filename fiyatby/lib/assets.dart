@@ -24,6 +24,7 @@ class _AssetsImages {
   final img1 = 'assets/images/splash.png';
   final img2 = 'assets/images/slider1.png';
   final img3 = 'assets/images/slider2.png';
+  final img4 = 'assets/images/google.png';
 
 
 
