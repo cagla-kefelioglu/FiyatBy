@@ -1,12 +1,12 @@
 // ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, sort_child_properties_last, unnecessary_new
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyatby/Constant/constant.dart';
-import 'package:fiyatby/View/HomePage.dart';
 import 'package:fiyatby/View/Register.dart';
 import 'package:flutter/material.dart';
 import 'package:grock/grock.dart';
-
 import '../Assets.dart';
+import 'base_scaffold.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +16,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -98,6 +107,7 @@ class _LoginState extends State<Login> {
                                                     _fiedlDecoration.copyWith(
                                                   labelText: "Mail",
                                                 ),
+                                                controller: email,
                                               ),
                                             ),
                                           ),
@@ -110,7 +120,9 @@ class _LoginState extends State<Login> {
                                             child: Container(
                                               decoration: _boxDecoration,
                                               child: TextFormField(
-                                                  decoration: _fiedlDecoration),
+                                                decoration: _fiedlDecoration,
+                                                controller: password,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -121,7 +133,14 @@ class _LoginState extends State<Login> {
                                             width: width * 1,
                                             height: 50,
                                             child: ElevatedButton(
-                                              onPressed: () {Grock.toRemove(Homepage());},
+                                              onPressed: () async {
+                                                await FirebaseAuth.instance
+                                                    .signInWithEmailAndPassword(
+                                                        email: email.text,
+                                                        password:
+                                                            password.text);
+                                                Grock.toRemove(Dashboard());
+                                              },
                                               child: Text(
                                                 "Giriş Yap",
                                                 style: TextStyle(
@@ -171,18 +190,19 @@ class _LoginState extends State<Login> {
                                                 ],
                                               ),
                                               style: ElevatedButton.styleFrom(
-                                                  elevation: 0,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  side: const BorderSide(
-                                                      width: 2,
-                                                      color: Constant.blueOne),
-                                                  shape:
-                                                      new RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        new BorderRadius
-                                                            .circular(10),
-                                                  )),
+                                                elevation: 0,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                side: const BorderSide(
+                                                    width: 2,
+                                                    color: Constant.blueOne),
+                                                shape:
+                                                    new RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      new BorderRadius.circular(
+                                                          10),
+                                                ),
+                                              ),
                                             ),
                                           )
                                         ],

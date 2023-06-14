@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -13,6 +13,7 @@ class Constant {
   static const Color dark = Color(0xFF000000);
   static const Color white = Color(0xFFffffff);
   static const Color input = Color(0xFFF0F0F3);
+  static final popat =Color.fromRGBO(255, 255, 252, 0.48);
 
 
 }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "45926810943",
+    "project_id": "fiyatby",
+    "storage_bucket": "fiyatby.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45926810943:android:700fc02c5bf3efc7627f8a",
+        "android_client_info": {
+          "package_name": "com.example.fiyatby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45926810943-f4ctrl5flq5bgj8dku66nk9495r29uj0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fiyatby",
+            "certificate_hash": "bd6883565702fadea7b92f2e75bd7663e3de9c4f"
+          }
+        },
+        {
+          "client_id": "45926810943-6hr1fohnok1tutpkakccb6s938lug55i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC42HMbsKg8pL43I05ysBCtKULhIq2vS7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45926810943-6hr1fohnok1tutpkakccb6s938lug55i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

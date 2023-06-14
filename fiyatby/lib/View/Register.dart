@@ -1,5 +1,5 @@
-// ignore_for_file: unused_local_variable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, sort_child_properties_last, unnecessary_new
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyatby/Constant/constant.dart';
 import 'package:fiyatby/View/Login.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,22 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  Future<void> saveUserData(
+    UserCredential value,
+  ) async {
+    print(value.additionalUserInfo!.isNewUser.toString() + " yeni user mi ? ");
+    print("objectt");
+    FirebaseFirestore.instance.collection("Users").doc(value.user!.uid).set({
+      "products":{
+        "car":[],
+        "computer":[]
+      }
+           
+    });
+  }
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -92,14 +108,14 @@ class _RegisterState extends State<Register> {
             padding: const EdgeInsets.only(top: 20.0),
             child: SizedBox(
               width: width * 1,
-              height: height * 0.8,
+              height: height * 0.88,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: width * 0.85,
-                    height: height * 0.6,
+                    height: height * 0.605,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -117,7 +133,7 @@ class _RegisterState extends State<Register> {
                         children: [
                           Container(
                             width: width * 0.84,
-                            height: height * 0.595,
+                            height: height * 0.6,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: Constant.white),
@@ -139,7 +155,7 @@ class _RegisterState extends State<Register> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 20,
                                 ),
                                 Expanded(
                                   child: Form(
@@ -163,11 +179,12 @@ class _RegisterState extends State<Register> {
                                                       _fiedlDecoration.copyWith(
                                                     labelText: "Mail",
                                                   ),
+                                                  controller: email,
                                                 ),
                                               ),
                                             ),
                                             SizedBox(
-                                              height: height * 0.05,
+                                              height: 20,
                                             ),
                                             SizedBox(
                                               width: width * 1,
@@ -175,12 +192,13 @@ class _RegisterState extends State<Register> {
                                               child: Container(
                                                 decoration: _boxDecoration,
                                                 child: TextFormField(
-                                                    decoration:
-                                                        _fiedlDecoration),
+                                                  decoration: _fiedlDecoration,
+                                                  controller: password,
+                                                ),
                                               ),
                                             ),
                                             SizedBox(
-                                              height: height * 0.05,
+                                              height: 20,
                                             ),
                                             SizedBox(
                                               width: width * 1,
@@ -203,7 +221,17 @@ class _RegisterState extends State<Register> {
                                               width: width * 1,
                                               height: 50,
                                               child: ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () async {
+                                                  FirebaseAuth.instance
+                                                      .createUserWithEmailAndPassword(
+                                                          email: email.text,
+                                                          password:
+                                                              password.text)
+                                                      .then((value) async =>
+                                                          await saveUserData(
+                                                              value));
+                                                  Grock.toRemove(Login());
+                                                },
                                                 child: Text(
                                                   "Kayıt Ol",
                                                   style: TextStyle(
