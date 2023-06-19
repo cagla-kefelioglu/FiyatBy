@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import, unused_field, must_be_immutable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, deprecated_member_use, sized_box_for_whitespace, use_key_in_widget_constructors, prefer_interpolation_to_compose_strings, duplicate_import, unused_local_variable, unused_element, unrelated_type_equality_checks, prefer_typing_uninitialized_variables
 
+import 'dart:io';
 import 'package:fiyatby/View/base_scaffold.dart';
 import 'package:fiyatby/popup/delete_popup.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +8,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grock/grock.dart';
-
 import '../../Constant/constant.dart';
-
 import '../../assets.dart';
 
 class SaveDialogPopat extends StatelessWidget {
+  var image;
+  SaveDialogPopat({required this.image});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -24,12 +25,12 @@ class SaveDialogPopat extends StatelessWidget {
         insetPadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 0,
-        child: _buildChild(context, height, width),
+        child: _buildChild(context, height, width,image!),
       ),
     );
   }
 
-  _buildChild(BuildContext context, var height, var width) =>
+  _buildChild(BuildContext context, var height, var width,var imagee) =>
       SingleChildScrollView(
         child: Column(
           children: [
@@ -67,9 +68,12 @@ class SaveDialogPopat extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Image.asset(
-                              Assets.images.img5,
-                            ),
+                             Image.file(
+                                imagee,
+                                fit: BoxFit.fill,
+                                width: width*0.7,
+                                height: 50,
+                              ),
                           ],
                         )
                       ],

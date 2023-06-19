@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, file_names, prefer_const_literals_to_create_immutables, avoid_print, deprecated_member_use, use_build_context_synchronously, unnecessary_null_comparison, curly_braces_in_flow_control_structures, prefer_const_constructors_in_immutables
 
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fiyatby/Constant/constant.dart';
 import 'package:fiyatby/View/fiyatTahmin.dart';
 import 'package:fiyatby/assets.dart';
@@ -18,17 +19,25 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   File? image;
   final picker = ImagePicker();
-
+  String imageURL = '';
   Future getImage(ImageSource source) async {
     final pickedFile = await picker.getImage(source: source);
     image = File(pickedFile!.path);
-      String category="Araba";
 
-      Grock.to(FiyatTahmin(
-        image: image!, category: category,
-      ));
-   
-   
+    String uniqFileName = DateTime.now().microsecondsSinceEpoch.toString();
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+    Reference referenceImageToUpload = referenceDirImages.child(uniqFileName);
+    try {
+      await referenceImageToUpload.putFile(image!);
+      imageURL = await referenceImageToUpload.getDownloadURL();
+    } catch (e) {
+      print('Hata: $e');
+    }
+
+    String category = 'Telefon';
+    Grock.to(
+        FiyatTahmin(image: image!, category: category, imageURL: imageURL));
   }
 
   void onImageButtonPressed(ImageSource source) async {

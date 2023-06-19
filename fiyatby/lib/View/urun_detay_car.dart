@@ -20,120 +20,115 @@ class _DetailCarProductsState extends State<DetailCarProducts> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                width: width * 1,
-                decoration: BoxDecoration(
-                  color: Constant.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: height * 0.15,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: SvgPicture.asset(Assets.icons.arroweSVG)),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "Ürün Detay",
-                              style: _textStyle,
-                            )
-                          ],
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Container(
+            width: width * 1,
+            decoration: BoxDecoration(
+              color: Constant.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height * 0.15,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: SvgPicture.asset(Assets.icons.arroweSVG)),
+                        SizedBox(
+                          width: 20,
                         ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Container(
-                            width: width * 1,
-                            decoration: BoxDecoration(
-                              color: Constant.white,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 28.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: width * 0.7,
-                                    child: Image.asset(
-                                      Assets.images.img5,
-                                      /*ürünün resmi gelecek */
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  infoElements(
-                                    text: 'Fiyat: ',
-                                    data: widget.data['fiyat'].toString(),
-                                  ),
-                                  infoElements(
-                                      text: 'Motor Büyüklüğü: ',
-                                      data: widget.data['motor'].toString()),
-                                  infoElements(
-                                      text: 'Silindirler: ',
-                                      data: widget.data['silindir'].toString()),
-                                  infoElements(
-                                      text: 'Beygir gücü: ',
-                                      data: widget.data['beygir'].toString()),
-                                  infoElements(
-                                      text: 'Şehir içi mol/galon: ',
-                                      data: widget.data['sehir'].toString()),
-                                  infoElements(
-                                      text: 'Otoyol mol/galon: ',
-                                      data: widget.data['otoyol'].toString()),
-                                  infoElements(
-                                      text: 'Mekanizasyon: ',
-                                      data:
-                                          widget.data['driveTrain'].toString()),
-                                  infoElements(
-                                      text: 'Üretim Yeri: ',
-                                      data: widget.data['origin'].toString()),
-                                  infoElements(
-                                      text: 'Marka: ',
-                                      data: widget.data['marka'].toString()),
-                                  infoElements(
-                                      text: 'Model: ',
-                                      data: widget.data['model'].toString()),
-                                  infoElements(
-                                      text: 'Tip: ',
-                                      data: widget.data['type'].toString()),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                ],
+                        Text(
+                          "Ürün Detay",
+                          style: _textStyle,
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        width: width * 1,
+                        decoration: BoxDecoration(
+                          color: Constant.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 28.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: width * 0.7,
+                                child: Image.network(widget.data['image'],width: width*0.7,height: height*0.2,fit: BoxFit.fill,)
                               ),
-                            ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              infoElements(
+                                text: 'Fiyat: ',
+                                data: widget.data['fiyat'].toString(),
+                              ),
+                              infoElements(
+                                  text: 'Motor Büyüklüğü: ',
+                                  data: widget.data['motor'].toString()),
+                              infoElements(
+                                  text: 'Silindirler: ',
+                                  data: widget.data['silindir'].toString()),
+                              infoElements(
+                                  text: 'Beygir gücü: ',
+                                  data: widget.data['beygir'].toString()),
+                              infoElements(
+                                  text: 'Şehir içi mol/galon: ',
+                                  data: widget.data['sehir'].toString()),
+                              infoElements(
+                                  text: 'Otoyol mol/galon: ',
+                                  data: widget.data['otoyol'].toString()),
+                              infoElements(
+                                  text: 'Mekanizasyon: ',
+                                  data:
+                                      widget.data['driveTrain'].toString()),
+                              infoElements(
+                                  text: 'Üretim Yeri: ',
+                                  data: widget.data['origin'].toString()),
+                              infoElements(
+                                  text: 'Marka: ',
+                                  data: widget.data['marka'].toString()),
+                              infoElements(
+                                  text: 'Model: ',
+                                  data: widget.data['model'].toString()),
+                              infoElements(
+                                  text: 'Tip: ',
+                                  data: widget.data['type'].toString()),
+                              SizedBox(
+                                height: 30,
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-          ]),
-    ));
+          ),
+        ),
+      ]),
+    );
   }
 }
 

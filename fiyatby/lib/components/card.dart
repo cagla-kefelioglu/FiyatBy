@@ -11,6 +11,7 @@ import '../Constant/constant.dart';
 class CardComponents extends StatefulWidget {
   CardComponents({required this.data});
   var data;
+  
   @override
   State<CardComponents> createState() => _CardComponentsState();
 }
@@ -19,6 +20,7 @@ class _CardComponentsState extends State<CardComponents> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+
     return GrockContainer(
       onTap: () {
         _openDialog(context, widget.data);
@@ -34,10 +36,7 @@ class _CardComponentsState extends State<CardComponents> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            Assets.images.img5,
-            width: width * 0.3,
-          ),
+       Image.network(widget.data['image'],width: width*0.3,height: 70,fit: BoxFit.cover,),
           SizedBox(
             height: 10,
           ),

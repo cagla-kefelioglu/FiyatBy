@@ -1,7 +1,11 @@
 // ignore_for_file: unused_import, unused_field, must_be_immutable, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, deprecated_member_use, sized_box_for_whitespace, use_key_in_widget_constructors, prefer_interpolation_to_compose_strings, duplicate_import, unused_local_variable, unused_element, unrelated_type_equality_checks, prefer_typing_uninitialized_variables
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fiyatby/View/HomePage.dart';
 import 'package:fiyatby/popup/delete_popup.dart';
 import 'package:fiyatby/popup/save_popup.dart';
@@ -26,19 +30,26 @@ class TahminDialogPopat extends StatelessWidget {
       otoyol,
       model,
       marka,
-      fiyat;
+      fiyat,
+      kategori;
+  File? image;
+  String imageURL;
   TahminDialogPopat(
-      {required this.type,
-      required this.origin,
-      required this.driveTrain,
-      required this.motor,
-      required this.silindir,
-      required this.beygir,
-      required this.sehir,
-      required this.otoyol,
-      required this.model,
-      required this.marka,
-      required this.fiyat});
+      {this.type,
+      this.origin,
+      this.driveTrain,
+      this.motor,
+      this.silindir,
+      this.beygir,
+      this.sehir,
+      this.otoyol,
+      this.model,
+      this.marka,
+      required this.fiyat,
+      required this.image,
+      required this.imageURL,
+      required this.kategori});
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -87,14 +98,19 @@ class TahminDialogPopat extends StatelessWidget {
                                     icon: SvgPicture.asset(
                                       Assets.icons.closeSVG,
                                       width: width * 0.2,
+                                      height: height * 0.01,
                                       color: Constant.blueOne,
                                     ),
                                   )
                                 ],
                               ),
                             ),
-                            Image.asset(
-                              Assets.images.img5,
+                            Container(
+                              width: width * 0.7,
+                              child: Image.file(
+                                image!,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ],
                         )
@@ -154,30 +170,84 @@ class TahminDialogPopat extends StatelessWidget {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12))),
-                                            onPressed: () {
-                                              Map<dynamic, dynamic> map = {
-                                                "fiyat": fiyat,
-                                                "beygir": beygir,
-                                                "driveTrain": driveTrain,
-                                                "marka": marka,
-                                                "model": model,
-                                                "type": type,
-                                                "origin": origin,
-                                                "motor": motor,
-                                                "otoyol": otoyol,
-                                                "sehir": sehir,
-                                                "silindir": silindir,
-                                              };
-                                              FirebaseFirestore.instance
-                                                  .collection("Users")
-                                                  .doc(FirebaseAuth
-                                                      .instance.currentUser!.uid
-                                                      .toString())
-                                                  .update({
-                                                "car":
-                                                    FieldValue.arrayUnion([map])
-                                              });
-                                              _openDialog(context);
+                                            onPressed: () async {
+                                              if (kategori == 'Araba') {
+                                                Map<dynamic, dynamic> map = {
+                                                  "category":"Araba",
+                                                  "fiyat": fiyat,
+                                                  "beygir": beygir,
+                                                  "driveTrain": driveTrain,
+                                                  "marka": marka,
+                                                  "model": model,
+                                                  "type": type,
+                                                  "origin": origin,
+                                                  "motor": motor,
+                                                  "otoyol": otoyol,
+                                                  "sehir": sehir,
+                                                  "silindir": silindir,
+                                                  "image": imageURL,
+                                                };
+
+                                                FirebaseFirestore.instance
+                                                    .collection("Users")
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser!.uid
+                                                        .toString())
+                                                    .update({
+                                                  "car": FieldValue.arrayUnion(
+                                                      [map])
+                                                });
+                                              } else if (kategori ==
+                                                  'Telefon') {
+                                                Map<dynamic, dynamic> map = {
+                                                  "category":"Telefon",
+                                                  "fiyat": fiyat,
+                                                  "ekran": beygir,
+                                                  "marka": marka,
+                                                  "model": model,
+                                                  "ram": motor,
+                                                  "hafiza": sehir,
+                                                  "onKamera": silindir,
+                                                  "image": imageURL,
+                                                };
+
+                                                FirebaseFirestore.instance
+                                                    .collection("Users")
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser!.uid
+                                                        .toString())
+                                                    .update({
+                                                  "phone":
+                                                      FieldValue.arrayUnion(
+                                                          [map])
+                                                });
+                                              } else if (kategori ==
+                                                  'Bilgisayar') {
+                                                Map<dynamic, dynamic> map = {
+                                                  "category":"Bilgisayar",
+                                                  "fiyat": fiyat,
+                                                  "ekran": beygir,
+                                                  "marka": marka,
+                                                  "model": model,
+                                                  "ram": motor,
+                                                  "hafiza": sehir,
+                                                  "onKamera": silindir,
+                                                  "image": imageURL,
+                                                };
+
+                                                FirebaseFirestore.instance
+                                                    .collection("Users")
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser!.uid
+                                                        .toString())
+                                                    .update({
+                                                  "phone":
+                                                      FieldValue.arrayUnion(
+                                                          [map])
+                                                });
+                                              }
+
+                                              _openDialog(context, image);
                                             },
                                             child: Row(
                                               mainAxisAlignment:
@@ -270,8 +340,8 @@ class TahminDialogPopat extends StatelessWidget {
       letterSpacing: 1.5);
 }
 
-Future _openDialog(context) => showDialog(
+Future _openDialog(context, image) => showDialog(
     barrierDismissible: false,
     barrierColor: Constant.popat,
     context: context,
-    builder: ((context) => SaveDialogPopat()));
+    builder: ((context) => SaveDialogPopat(image: image)));

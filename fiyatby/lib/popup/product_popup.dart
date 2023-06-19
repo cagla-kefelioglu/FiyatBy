@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyatby/View/urun_detay.dart';
 import 'package:fiyatby/View/urun_detay_car.dart';
+import 'package:fiyatby/View/urun_detay_phone.dart';
 import 'package:fiyatby/popup/delete_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -72,9 +73,12 @@ class ProductsPopat extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Image.asset(
-                              Assets.images.img5,
-                            ),
+                            Image.network(
+                              data['image'],
+                              width: width * 0.7,
+                              height: height * 0.2,
+                              fit: BoxFit.fill,
+                            )
                           ],
                         )
                       ],
@@ -134,9 +138,18 @@ class ProductsPopat extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             12))),
                                             onPressed: () {
-                                              //if(widget.category == "Bilgisayar")
-                                              Grock.to(DetailCarProducts(
+                                              if(data['category'].toString() == "Araba"){
+                                                Grock.to(DetailCarProducts(
                                                   data: data));
+                                              }else if(data['category'].toString()=="Telefon"){
+                                                 Grock.to(DetailPhoneProducts(
+                                                  data: data));
+                                              }
+                                              else if(data['category'].toString()=="Bilgisayar"){
+                                                 Grock.to(DetailComputerProducts(
+                                                  data: data));
+                                              }
+                                                                                         
                                             },
                                             child: Row(
                                               mainAxisAlignment:
@@ -177,7 +190,9 @@ class ProductsPopat extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             12))),
                                             onPressed: () {
-                                              FirebaseFirestore.instance
+
+                                              if(data['category'].toString() == "Araba"){
+                                                   FirebaseFirestore.instance
                                                   .collection("Users")
                                                   .doc(FirebaseAuth.instance
                                                       .currentUser!.uid)
@@ -185,6 +200,28 @@ class ProductsPopat extends StatelessWidget {
                                                 "car": FieldValue.arrayRemove(
                                                     [data])
                                               });
+                                              }else if(data['category'].toString()=="Telefon"){
+                                                     FirebaseFirestore.instance
+                                                  .collection("Users")
+                                                  .doc(FirebaseAuth.instance
+                                                      .currentUser!.uid)
+                                                  .update({
+                                                "phone": FieldValue.arrayRemove(
+                                                    [data])
+                                              });
+                                              }
+                                              else if(data['category'].toString()=="Bilgisayar"){
+                                                     FirebaseFirestore.instance
+                                                  .collection("Users")
+                                                  .doc(FirebaseAuth.instance
+                                                      .currentUser!.uid)
+                                                  .update({
+                                                "computer": FieldValue.arrayRemove(
+                                                    [data])
+                                              });
+                                              }
+
+                                          
                                               _openDialogTwo(context);
                                             },
                                             child: Row(

@@ -8,14 +8,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:grock/grock.dart';
 import '../Assets.dart';
 
-class DetailComputerProducts extends StatefulWidget {
-  DetailComputerProducts({super.key, required this.data});
+class DetailPhoneProducts extends StatefulWidget {
+  DetailPhoneProducts({super.key, required this.data});
   var data;
   @override
-  State<DetailComputerProducts> createState() => _DetailComputerProductsState();
+  State<DetailPhoneProducts> createState() => _DetailPhoneProductsState();
 }
 
-class _DetailComputerProductsState extends State<DetailComputerProducts> {
+class _DetailPhoneProductsState extends State<DetailPhoneProducts> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -87,21 +87,23 @@ class _DetailComputerProductsState extends State<DetailComputerProducts> {
                                     data: widget.data['fiyat'].toString(),
                                   ),
                                   infoElements(
-                                      text: 'Ram: ',
-                                      data: widget.data['ram'].toString()),
+                                      text: 'Hafıza: ',
+                                      data: widget.data['hafiza'].toString()),
                                   infoElements(
                                       text: 'Ekran Boyutu: ',
                                       data: widget.data['ekran'].toString()),
                                   infoElements(
-                                      text: 'Hız: ',
-                                      data: widget.data['hiz'].toString()),
+                                      text: 'Marka: ',
+                                      data: widget.data['marka'].toString()),
                                   infoElements(
-                                      text: 'Hd: ',
-                                      data: widget.data['hd'].toString()),
+                                      text: 'Model: ',
+                                      data: widget.data['model'].toString()),
                                   infoElements(
-                                      text: 'Cd: ',
-                                      data: widget.data['cd'].toString()),
-                              
+                                      text: 'Ön kamera çözünürlüğü: ',
+                                      data: widget.data['onKamera'].toString()),
+                                  infoElements(
+                                      text: 'Ram: ',
+                                      data: widget.data['ram'].toString()),
                                   SizedBox(
                                     height: 30,
                                   ),

@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.8.0
   tflite_flutter: ^0.10.1
   http: ^0.13.4
+  firebase_storage: ^11.2.3
 #  tflite: ^1.1.2
 dev_dependencies:
   flutter_test:

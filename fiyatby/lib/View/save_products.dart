@@ -85,7 +85,61 @@ class _SaveProductsState extends State<SaveProducts> {
                                       return CircularProgressIndicator();
                                     }
                                   },
-                                )
+                                ),
+                                SizedBox(height: 20,),
+                                   StreamBuilder<DocumentSnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection("Users")
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      List a = snapshot.data!['phone'];
+                                      return Wrap(
+                                        alignment: WrapAlignment.start,
+                                        direction: Axis.horizontal,
+                                        runSpacing: 20,
+                                        spacing: width * 0.05,
+                                        children: List<Widget>.generate(
+                                            a.length, (index) {
+                                          return CardComponents(data: a[index]);
+                                        }),
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  },
+                                ),
+                                 SizedBox(height: 20,),
+                                   StreamBuilder<DocumentSnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection("Users")
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      List a = snapshot.data!['computer'];
+                                      return Wrap(
+                                        alignment: WrapAlignment.start,
+                                        direction: Axis.horizontal,
+                                        runSpacing: 20,
+                                        spacing: width * 0.05,
+                                        children: List<Widget>.generate(
+                                            a.length, (index) {
+                                          return CardComponents(data: a[index]);
+                                        }),
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    } else {
+                                      return CircularProgressIndicator();
+                                    }
+                                  },
+                                ),
                               ],
                             ),
                           ),
