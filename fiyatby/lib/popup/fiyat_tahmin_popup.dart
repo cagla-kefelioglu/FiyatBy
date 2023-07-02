@@ -31,7 +31,9 @@ class TahminDialogPopat extends StatelessWidget {
       model,
       marka,
       fiyat,
-      kategori;
+      kategori,
+      cd,
+      multi;
   File? image;
   String imageURL;
   TahminDialogPopat(
@@ -45,6 +47,8 @@ class TahminDialogPopat extends StatelessWidget {
       this.otoyol,
       this.model,
       this.marka,
+      this.cd,
+      this.multi,
       required this.fiyat,
       required this.image,
       required this.imageURL,
@@ -171,9 +175,9 @@ class TahminDialogPopat extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             12))),
                                             onPressed: () async {
-                                              if (kategori == 'Araba') {
+                                              if (kategori == 'car') {
                                                 Map<dynamic, dynamic> map = {
-                                                  "category":"Araba",
+                                                  "category": "Araba",
                                                   "fiyat": fiyat,
                                                   "beygir": beygir,
                                                   "driveTrain": driveTrain,
@@ -197,10 +201,9 @@ class TahminDialogPopat extends StatelessWidget {
                                                   "car": FieldValue.arrayUnion(
                                                       [map])
                                                 });
-                                              } else if (kategori ==
-                                                  'Telefon') {
+                                              } else if (kategori == 'phone') {
                                                 Map<dynamic, dynamic> map = {
-                                                  "category":"Telefon",
+                                                  "category": "Telefon",
                                                   "fiyat": fiyat,
                                                   "ekran": beygir,
                                                   "marka": marka,
@@ -222,16 +225,17 @@ class TahminDialogPopat extends StatelessWidget {
                                                           [map])
                                                 });
                                               } else if (kategori ==
-                                                  'Bilgisayar') {
+                                                  'computer') {
                                                 Map<dynamic, dynamic> map = {
-                                                  "category":"Bilgisayar",
+                                                  "category": "Bilgisayar",
                                                   "fiyat": fiyat,
                                                   "ekran": beygir,
-                                                  "marka": marka,
-                                                  "model": model,
                                                   "ram": motor,
-                                                  "hafiza": sehir,
-                                                  "onKamera": silindir,
+                                                  "hiz": sehir,
+                                                  "hd": silindir,
+                                                  "cd":cd==0? "Yok" :"Var",
+                                                  "multi":multi==0?"Yok":"Var",
+                                                  "trend":otoyol,
                                                   "image": imageURL,
                                                 };
 
@@ -241,7 +245,7 @@ class TahminDialogPopat extends StatelessWidget {
                                                         .currentUser!.uid
                                                         .toString())
                                                     .update({
-                                                  "phone":
+                                                  "computer":
                                                       FieldValue.arrayUnion(
                                                           [map])
                                                 });

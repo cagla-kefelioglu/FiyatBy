@@ -36,7 +36,7 @@ class _FiyatTahminState extends State<FiyatTahmin> {
   var origin, originAdi;
   var drive, driveAdi;
   var yuzTanima, yuzTanimaAdi;
-  var deceitOne,deceitOneAdi;
+  var deceitOne, deceitOneAdi,multiOneAdi,multiOne;
   final MyServer myServer = MyServer();
   TextEditingController motor = TextEditingController();
   TextEditingController silindir = TextEditingController();
@@ -52,8 +52,10 @@ class _FiyatTahminState extends State<FiyatTahmin> {
       selectedItemType,
       selectedItemModel,
       selectedItemPcModel,
-      selectedPcItem, selectedItemTfModel,
-      selectedTfItem;
+      selectedPcItem,
+      selectedItemTfModel,
+      selectedTfItem,
+      selectedItemDeceit,selectedMulti,selectedItemMulti;
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +117,11 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                     ),
                                     Input(
                                       width: width,
-                                      labelText: widget.category == 'Telefon'
+                                      labelText: widget.category == 'phone'
                                           ? "Ram "
-                                          : widget.category == 'Araba'? "Motor Büyüklüğü" :"Ram",
+                                          : widget.category == 'car'
+                                              ? "Motor Büyüklüğü"
+                                              : "Ram",
                                       deger: motor,
                                     ),
                                     SizedBox(
@@ -125,9 +129,11 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                     ),
                                     Input(
                                       width: width,
-                                      labelText: widget.category == 'Telefon'
+                                      labelText: widget.category == 'phone'
                                           ? "Ön kamera Çözünürlüğü"
-                                          :widget.category == 'Araba'? "Silindirler" :"HD",
+                                          : widget.category == 'car'
+                                              ? "Silindirler"
+                                              : "HD",
                                       deger: silindir,
                                     ),
                                     SizedBox(
@@ -135,9 +141,11 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                     ),
                                     Input(
                                       width: width,
-                                      labelText: widget.category == 'Telefon' 
+                                      labelText: widget.category == 'phone'
                                           ? "Ekran Boyutu"
-                                          :widget.category == 'Araba'? "Beygir gücü" : "Ekran boyutu" ,
+                                          : widget.category == 'car'
+                                              ? "Beygir gücü"
+                                              : "Ekran boyutu",
                                       deger: beygir,
                                     ),
                                     SizedBox(
@@ -145,22 +153,25 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                     ),
                                     Input(
                                       width: width,
-                                      labelText: widget.category == 'Telefon'
+                                      labelText: widget.category == 'phone'
                                           ? "Hafıza"
-                                          :widget.category == 'Araba'? "Şehir içi mol/galon" : "Hız",
+                                          : widget.category == 'car'
+                                              ? "Şehir içi mol/galon"
+                                              : "Hız",
                                       deger: sehir,
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     Visibility(
-                                      visible: widget.category == "Araba",
+                                      visible: widget.category == "car" ||
+                                          widget.category == "computer",
                                       child: Column(
                                         children: [
                                           Input(
                                             width: width,
                                             labelText:
-                                                widget.category == "Bilgisayar"
+                                                widget.category == "computer"
                                                     ? "Trend"
                                                     : "Otoyol mol/galon ",
                                             deger: otoyol,
@@ -168,255 +179,319 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                          SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
+                                          Visibility(
+                                              visible: widget.category == "car",
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    width: width * 1,
+                                                    height: 55,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                              ),
+                                                              filled: true,
+                                                              hintStyle: TextStyle(
+                                                                  color: Constant
+                                                                      .dark),
+                                                              hintText:
+                                                                  "Mekanizasyon",
+                                                              fillColor:
+                                                                  Constant
+                                                                      .white),
+                                                      value: selectedItemDrive,
+                                                      icon: SvgPicture.asset(
+                                                          Assets.icons.galeri),
+                                                      items: map
+                                                          .driveTrainMap.keys
+                                                          .map((String
+                                                              drivetrain) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: drivetrain,
+                                                          child:
+                                                              Text(drivetrain),
+                                                        );
+                                                      }).toList(),
+                                                      onChanged:
+                                                          (Selectedmekanizasyon) {
+                                                        selectedItemDrive =
+                                                            Selectedmekanizasyon;
+                                                        int secilenMarkaNumarasi =
+                                                            map.driveTrainMap[
+                                                                selectedItemDrive]!;
+                                                        drive =
+                                                            secilenMarkaNumarasi;
+                                                        driveAdi =
+                                                            selectedItemDrive;
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value.isEmpty) {
+                                                          return 'Bu alanı seçmek zorunludur';
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
                                                   ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Mekanizasyon",
-                                                  fillColor: Constant.white),
-                                              value: selectedItemDrive,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.driveTrainMap.keys
-                                                  .map((String drivetrain) {
-                                                return DropdownMenuItem<String>(
-                                                  value: drivetrain,
-                                                  child: Text(drivetrain),
-                                                );
-                                              }).toList(),
-                                              onChanged:
-                                                  (Selectedmekanizasyon) {
-                                                selectedItemDrive =
-                                                    Selectedmekanizasyon;
-                                                int secilenMarkaNumarasi =
-                                                    map.driveTrainMap[
-                                                        selectedItemDrive]!;
-                                                drive = secilenMarkaNumarasi;
-                                                driveAdi = selectedItemDrive;
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Üretim Yeri",
-                                                  fillColor: Constant.white),
-                                              value: selectedItemOrigin,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.originMap.keys
-                                                  .map((String originn) {
-                                                return DropdownMenuItem<String>(
-                                                  value: originn,
-                                                  child: Text(originn),
-                                                );
-                                              }).toList(),
-                                              onChanged: (Selectedorigin) {
-                                                selectedItemOrigin =
-                                                    Selectedorigin;
-                                                int secilenMarkaNumarasi =
-                                                    map.originMap[
-                                                        selectedItemOrigin]!;
-                                                origin = secilenMarkaNumarasi;
-                                                originAdi = selectedItemOrigin;
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
+                                                  SizedBox(
+                                                    width: width * 1,
+                                                    height: 55,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                              ),
+                                                              filled: true,
+                                                              hintStyle: TextStyle(
+                                                                  color: Constant
+                                                                      .dark),
+                                                              hintText:
+                                                                  "Üretim Yeri",
+                                                              fillColor:
+                                                                  Constant
+                                                                      .white),
+                                                      value: selectedItemOrigin,
+                                                      icon: SvgPicture.asset(
+                                                          Assets.icons.galeri),
+                                                      items: map.originMap.keys
+                                                          .map(
+                                                              (String originn) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: originn,
+                                                          child: Text(originn),
+                                                        );
+                                                      }).toList(),
+                                                      onChanged:
+                                                          (Selectedorigin) {
+                                                        selectedItemOrigin =
+                                                            Selectedorigin;
+                                                        int secilenMarkaNumarasi =
+                                                            map.originMap[
+                                                                selectedItemOrigin]!;
+                                                        origin =
+                                                            secilenMarkaNumarasi;
+                                                        originAdi =
+                                                            selectedItemOrigin;
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value.isEmpty) {
+                                                          return 'Bu alanı seçmek zorunludur';
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
                                                   ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Marka",
-                                                  fillColor: Constant.white),
-                                              value: selectedItem,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.arabaMarkalari.keys
-                                                  .map((String marka) {
-                                                return DropdownMenuItem<String>(
-                                                  value: marka,
-                                                  child: Text(marka),
-                                                );
-                                              }).toList(),
-                                              onChanged: (yeniMarka) {
-                                                setState(() {
-                                                  selectedItem = yeniMarka;
-                                                  int secilenMarkaNumarasi =
-                                                      map.arabaMarkalari[
-                                                          selectedItem]!;
-                                                  marka = secilenMarkaNumarasi;
-                                                  markaAdi = selectedItem;
-                                                });
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(
+                                                    width: width * 1,
+                                                    height: 55,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                              ),
+                                                              filled: true,
+                                                              hintStyle: TextStyle(
+                                                                  color: Constant
+                                                                      .dark),
+                                                              hintText: "Marka",
+                                                              fillColor:
+                                                                  Constant
+                                                                      .white),
+                                                      value: selectedItem,
+                                                      icon: SvgPicture.asset(
+                                                          Assets.icons.galeri),
+                                                      items: map
+                                                          .arabaMarkalari.keys
+                                                          .map((String marka) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: marka,
+                                                          child: Text(marka),
+                                                        );
+                                                      }).toList(),
+                                                      onChanged: (yeniMarka) {
+                                                        setState(() {
+                                                          selectedItem =
+                                                              yeniMarka;
+                                                          int secilenMarkaNumarasi =
+                                                              map.arabaMarkalari[
+                                                                  selectedItem]!;
+                                                          marka =
+                                                              secilenMarkaNumarasi;
+                                                          markaAdi =
+                                                              selectedItem;
+                                                        });
 
-                                                map.updateModels(markaAdi);
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
+                                                        map.updateModels(
+                                                            markaAdi);
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value.isEmpty) {
+                                                          return 'Bu alanı seçmek zorunludur';
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
                                                   ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Model",
-                                                  fillColor: Constant.white),
-                                              value: selectedItemModel,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.modelMap.keys
-                                                  .map((String model) {
-                                                return DropdownMenuItem<String>(
-                                                  value: model,
-                                                  child: Text(model),
-                                                );
-                                              }).toList(),
-                                              onChanged: (yeniModel) {
-                                                setState(() {
-                                                  selectedItemModel = yeniModel;
-                                                  int secilenModelNumarasi =
-                                                      map.modelMap[
-                                                          selectedItemModel]!;
-                                                  model = secilenModelNumarasi;
-                                                  modeladi = selectedItemModel;
-                                                });
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Tip",
-                                                  fillColor: Constant.white),
-                                              value: selectedItemType,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.typeMap.keys
-                                                  .map((String tipp) {
-                                                return DropdownMenuItem<String>(
-                                                  value: tipp,
-                                                  child: Text(tipp),
-                                                );
-                                              }).toList(),
-                                              onChanged: (yeniTip) {
-                                                selectedItemType = yeniTip;
-                                                int secilenMarkaNumarasi = map
-                                                    .typeMap[selectedItemType]!;
-                                                tip = secilenMarkaNumarasi;
-                                                tipAdi = selectedItemType;
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
+                                                  SizedBox(
+                                                    width: width * 1,
+                                                    height: 55,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                              ),
+                                                              filled: true,
+                                                              hintStyle: TextStyle(
+                                                                  color: Constant
+                                                                      .dark),
+                                                              hintText: "Model",
+                                                              fillColor:
+                                                                  Constant
+                                                                      .white),
+                                                      value: selectedItemModel,
+                                                      icon: SvgPicture.asset(
+                                                          Assets.icons.galeri),
+                                                      items: map.modelMap.keys
+                                                          .map((String model) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: model,
+                                                          child: Text(model),
+                                                        );
+                                                      }).toList(),
+                                                      onChanged: (yeniModel) {
+                                                        setState(() {
+                                                          selectedItemModel =
+                                                              yeniModel;
+                                                          int secilenModelNumarasi =
+                                                              map.modelMap[
+                                                                  selectedItemModel]!;
+                                                          model =
+                                                              secilenModelNumarasi;
+                                                          modeladi =
+                                                              selectedItemModel;
+                                                        });
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value.isEmpty) {
+                                                          return 'Bu alanı seçmek zorunludur';
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  SizedBox(
+                                                    width: width * 1,
+                                                    height: 55,
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                              ),
+                                                              filled: true,
+                                                              hintStyle: TextStyle(
+                                                                  color: Constant
+                                                                      .dark),
+                                                              hintText: "Tip",
+                                                              fillColor:
+                                                                  Constant
+                                                                      .white),
+                                                      value: selectedItemType,
+                                                      icon: SvgPicture.asset(
+                                                          Assets.icons.galeri),
+                                                      items: map.typeMap.keys
+                                                          .map((String tipp) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: tipp,
+                                                          child: Text(tipp),
+                                                        );
+                                                      }).toList(),
+                                                      onChanged: (yeniTip) {
+                                                        selectedItemType =
+                                                            yeniTip;
+                                                        int secilenMarkaNumarasi =
+                                                            map.typeMap[
+                                                                selectedItemType]!;
+                                                        tip =
+                                                            secilenMarkaNumarasi;
+                                                        tipAdi =
+                                                            selectedItemType;
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value.isEmpty) {
+                                                          return 'Bu alanı seçmek zorunludur';
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ))
                                         ],
                                       ),
                                     ),
                                     Visibility(
-                                        visible: widget.category == "Telefon",
-                                    child: Column(
+                                        visible: widget.category == "phone",
+                                        child: Column(
                                           children: [
                                             SizedBox(
                                               width: width * 1,
@@ -527,10 +602,9 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                           ],
                                         )),
                                     Visibility(
-                                      visible: widget.category == "Bilgisayar",
+                                      visible: widget.category == "computer",
                                       child: Column(
                                         children: [
-                                  
                                           SizedBox(
                                             width: width * 1,
                                             height: 55,
@@ -552,21 +626,22 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                               icon: SvgPicture.asset(
                                                   Assets.icons.galeri),
                                               items: map.deceit.keys
-                                                  .map((String drivetrain) {
+                                                  .map((String deceit) {
                                                 return DropdownMenuItem<String>(
-                                                  value: drivetrain,
-                                                  child: Text(drivetrain),
+                                                  value: deceit,
+                                                  child: Text(deceit),
                                                 );
                                               }).toList(),
-                                              onChanged:
-                                                  (Selectedmekanizasyon) {
-                                                selectedItemDrive =
-                                                    Selectedmekanizasyon;
+                                              onChanged: (SelectedDeceit) {
+                                                selectedItemDeceit =
+                                                    SelectedDeceit;
                                                 int secilenMarkaNumarasi =
                                                     map.deceit[
-                                                        selectedItemDrive]!;
-                                                deceitOne = secilenMarkaNumarasi;
-                                                deceitOneAdi = selectedItemDrive;
+                                                        selectedItemDeceit]!;
+                                                deceitOne =
+                                                    secilenMarkaNumarasi;
+                                                deceitOneAdi =
+                                                    selectedItemDeceit;
                                               },
                                               validator: (value) {
                                                 if (value == null ||
@@ -580,13 +655,60 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                   SizedBox(
+                                             SizedBox(
+                                            width: width * 1,
+                                            height: 55,
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              decoration: InputDecoration(
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                  ),
+                                                  filled: true,
+                                                  hintStyle: TextStyle(
+                                                      color: Constant.dark),
+                                                  hintText: "Çoklu giriş",
+                                                  fillColor: Constant.white),
+                                              value: selectedMulti,
+                                              icon: SvgPicture.asset(
+                                                  Assets.icons.galeri),
+                                              items: map.deceit.keys
+                                                  .map((String deceit) {
+                                                return DropdownMenuItem<String>(
+                                                  value: deceit,
+                                                  child: Text(deceit),
+                                                );
+                                              }).toList(),
+                                              onChanged: (SelectedMulti) {
+                                                selectedItemMulti =
+                                                    SelectedMulti;
+                                                int secilenMarkaNumarasi =
+                                                    map.deceit[
+                                                        selectedItemMulti]!;
+                                                multiOne =
+                                                    secilenMarkaNumarasi;
+                                                multiOneAdi =
+                                                    selectedItemMulti;
+                                              },
+                                              validator: (value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {
+                                                  return 'Bu alanı seçmek zorunludur';
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ),
+                                         
+                                          SizedBox(
                                             height: 20,
                                           ),
                                         ],
                                       ),
                                     ),
-                                    
                                     SizedBox(
                                       width: width * 1,
                                       height: 55,
@@ -621,7 +743,7 @@ class _FiyatTahminState extends State<FiyatTahmin> {
 
                                             // Sunucuyu durdurmak için
                                             // await myServer.stopServer();
-                                            if (widget.category == 'Araba') {
+                                            if (widget.category == 'car') {
                                               _openDialogTwo(
                                                   context,
                                                   response,
@@ -639,7 +761,7 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                                   widget.imageURL,
                                                   widget.category);
                                             } else if (widget.category ==
-                                                'Telefon') {
+                                                'phone') {
                                               _openDialogTf(
                                                   context,
                                                   response,
@@ -652,6 +774,24 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                                   widget.image,
                                                   widget.imageURL,
                                                   widget.category);
+                                            } else if (widget.category ==
+                                                'computer') {
+                                              _openDialogCp(
+                                                  context,
+                                                  response,
+                                                  motor.text,
+                                                  beygir.text,
+                                                  deceitOneAdi,
+                                                  sehir.text,
+                                                  silindir.text,
+                                                  otoyol.text,
+                                                  multiOne,
+                                                  widget.image,
+                                                  widget.imageURL,
+                                                  widget.category);
+
+
+                                                  //context, fiyat, ram, ekran, cd, hiz, hd,trend, multi, image,imageURL, kategori
                                             }
                                           }
                                         },
@@ -719,8 +859,8 @@ Future _openDialogTf(context, fiyat, marka, model, ram, onKamera, ekran, hafiza,
               imageURL: imageURL,
               kategori: kategori,
             )));
-Future _openDialogCp(context, fiyat, ram, ekran, cd,hiz,hd,multi,
-        image, imageURL, kategori) =>
+Future _openDialogCp(context, fiyat, ram, ekran, cd, hiz, hd,trend, multi, image,
+        imageURL, kategori) =>
     showDialog(
         barrierDismissible: false,
         barrierColor: Constant.popat,
@@ -731,6 +871,9 @@ Future _openDialogCp(context, fiyat, ram, ekran, cd,hiz,hd,multi,
               motor: ram,
               sehir: hiz,
               silindir: hd,
+              otoyol: trend,
+              cd:cd,
+              multi:multi,
               image: image,
               imageURL: imageURL,
               kategori: kategori,

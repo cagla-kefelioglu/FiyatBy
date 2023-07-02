@@ -101,7 +101,12 @@ class _DetailComputerProductsState extends State<DetailComputerProducts> {
                                   infoElements(
                                       text: 'Cd: ',
                                       data: widget.data['cd'].toString()),
-                              
+                                  infoElements(
+                                      text: 'Multi: ',
+                                      data: widget.data['multi'].toString()),
+                                  infoElements(
+                                      text: 'Trend: ',
+                                      data: widget.data['trend'].toString()),
                                   SizedBox(
                                     height: 30,
                                   ),
