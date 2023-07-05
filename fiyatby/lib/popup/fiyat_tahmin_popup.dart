@@ -33,7 +33,7 @@ class TahminDialogPopat extends StatelessWidget {
       fiyat,
       kategori,
       cd,
-      multi;
+      multi,yuzTanima;
   File? image;
   String imageURL;
   TahminDialogPopat(
@@ -49,6 +49,7 @@ class TahminDialogPopat extends StatelessWidget {
       this.marka,
       this.cd,
       this.multi,
+      this.yuzTanima,
       required this.fiyat,
       required this.image,
       required this.imageURL,
@@ -143,7 +144,7 @@ class TahminDialogPopat extends StatelessWidget {
                                     fontSize: 24),
                               ),
                               Text(
-                                "120£",
+                                fiyat.toString(),
                                 style: _text.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: Constant.dark,
@@ -211,6 +212,7 @@ class TahminDialogPopat extends StatelessWidget {
                                                   "ram": motor,
                                                   "hafiza": sehir,
                                                   "onKamera": silindir,
+                                                  "yuzTanima":yuzTanima,
                                                   "image": imageURL,
                                                 };
 
@@ -245,7 +247,7 @@ class TahminDialogPopat extends StatelessWidget {
                                                         .currentUser!.uid
                                                         .toString())
                                                     .update({
-                                                  "computer":
+                                                  "computers":
                                                       FieldValue.arrayUnion(
                                                           [map])
                                                 });

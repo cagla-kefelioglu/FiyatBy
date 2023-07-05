@@ -1,8 +1,8 @@
 // ignore_for_file: unused_import, prefer_const_constructors, unused_element, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, must_be_immutable, prefer_typing_uninitialized_variables, unnecessary_null_comparison, unused_local_variable, curly_braces_in_flow_control_structures, unnecessary_new, unnecessary_this, unnecessary_brace_in_string_interps, non_constant_identifier_names, avoid_print, use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
-
 import 'package:fiyatby/Constant/constant.dart';
 import 'package:fiyatby/classAi.dart';
 import 'package:fiyatby/components/card.dart';
@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grock/grock.dart';
 import '../Assets.dart';
+import 'package:http/http.dart' as http;
 
 final _formKey = GlobalKey<FormState>();
 
@@ -28,15 +29,69 @@ class FiyatTahmin extends StatefulWidget {
 }
 
 class _FiyatTahminState extends State<FiyatTahmin> {
-  MapProvider map = MapProvider();
+  Future<dynamic> sendData() async {
+    var response;
+    if (widget.category == "car") {
+      response = await http.Client().post(
+        Uri.parse('http://192.168.1.37:8000/car'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          "make": marka,
+          "modell": model,
+          "type": tip,
+          "origin": origin,
+          "driveTrain": drive,
+          "engineSize": motor.text,
+          "cylinders": silindir.text,
+          "horsepower": beygir.text,
+          "mPGCity": sehir.text,
+          "mPGHighway": otoyol.text,
+          "category": widget.category
+        }),
+      );
+    } else if (widget.category == "computer") {
+      response = await http.Client().post(
+        Uri.parse('http://192.168.1.37:8000/computer'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          "hiz": sehir.text,
+          "hd": silindir.text,
+          "ram": motor.text,
+          "ekran": beygir.text,
+          "cd": deceitOne,
+          "multi": multiOne,
+          "ads": otoyol.text,
+          "category": widget.category
+        }),
+      );
+    } else if (widget.category == "phone") {
+      response = await http.Client().post(
+        Uri.parse('http://192.168.1.37:8000/phone'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          "model": model,
+          "marka": marka,
+          "ram": motor.text,
+          "kamera": silindir.text,
+          "ekran": beygir.text,
+          "yuzTanima": deceitOne,
+          "hafiza": sehir.text,
+          "category": widget.category
+        }),
+      );
+    }
+    return response;
+  }
 
+  MapProvider map = MapProvider();
+  bool isLoading = false;
   var marka, markaAdi;
   var tip, tipAdi;
   var model, modeladi;
   var origin, originAdi;
   var drive, driveAdi;
   var yuzTanima, yuzTanimaAdi;
-  var deceitOne, deceitOneAdi,multiOneAdi,multiOne;
+  var deceitOne, deceitOneAdi, multiOneAdi, multiOne;
   final MyServer myServer = MyServer();
   TextEditingController motor = TextEditingController();
   TextEditingController silindir = TextEditingController();
@@ -55,7 +110,9 @@ class _FiyatTahminState extends State<FiyatTahmin> {
       selectedPcItem,
       selectedItemTfModel,
       selectedTfItem,
-      selectedItemDeceit,selectedMulti,selectedItemMulti;
+      selectedItemDeceit,
+      selectedMulti,
+      selectedItemMulti;
 
   @override
   Widget build(BuildContext context) {
@@ -602,7 +659,8 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                           ],
                                         )),
                                     Visibility(
-                                      visible: widget.category == "computer",
+                                      visible: widget.category == "computer" ||
+                                          widget.category == "phone",
                                       child: Column(
                                         children: [
                                           SizedBox(
@@ -620,7 +678,10 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                                   filled: true,
                                                   hintStyle: TextStyle(
                                                       color: Constant.dark),
-                                                  hintText: "Cd girşi",
+                                                  hintText: widget.category ==
+                                                          "computer"
+                                                      ? "Cd girşi"
+                                                      : "Yüz Tanıma",
                                                   fillColor: Constant.white),
                                               value: selectedTfItem,
                                               icon: SvgPicture.asset(
@@ -655,54 +716,57 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                           SizedBox(
                                             height: 20,
                                           ),
-                                             SizedBox(
-                                            width: width * 1,
-                                            height: 55,
-                                            child:
-                                                DropdownButtonFormField<String>(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                  ),
-                                                  filled: true,
-                                                  hintStyle: TextStyle(
-                                                      color: Constant.dark),
-                                                  hintText: "Çoklu giriş",
-                                                  fillColor: Constant.white),
-                                              value: selectedMulti,
-                                              icon: SvgPicture.asset(
-                                                  Assets.icons.galeri),
-                                              items: map.deceit.keys
-                                                  .map((String deceit) {
-                                                return DropdownMenuItem<String>(
-                                                  value: deceit,
-                                                  child: Text(deceit),
-                                                );
-                                              }).toList(),
-                                              onChanged: (SelectedMulti) {
-                                                selectedItemMulti =
-                                                    SelectedMulti;
-                                                int secilenMarkaNumarasi =
-                                                    map.deceit[
-                                                        selectedItemMulti]!;
-                                                multiOne =
-                                                    secilenMarkaNumarasi;
-                                                multiOneAdi =
-                                                    selectedItemMulti;
-                                              },
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'Bu alanı seçmek zorunludur';
-                                                }
-                                                return null;
-                                              },
+                                          Visibility(
+                                            visible:
+                                                widget.category == "computer",
+                                            child: SizedBox(
+                                              width: width * 1,
+                                              height: 55,
+                                              child: DropdownButtonFormField<
+                                                  String>(
+                                                decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10)),
+                                                    ),
+                                                    filled: true,
+                                                    hintStyle: TextStyle(
+                                                        color: Constant.dark),
+                                                    hintText: "Çoklu giriş",
+                                                    fillColor: Constant.white),
+                                                value: selectedMulti,
+                                                icon: SvgPicture.asset(
+                                                    Assets.icons.galeri),
+                                                items: map.deceit.keys
+                                                    .map((String deceit) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: deceit,
+                                                    child: Text(deceit),
+                                                  );
+                                                }).toList(),
+                                                onChanged: (SelectedMulti) {
+                                                  selectedItemMulti =
+                                                      SelectedMulti;
+                                                  int secilenDeceit =
+                                                      map.deceit[
+                                                          selectedItemMulti]!;
+                                                  multiOne = secilenDeceit;
+                                                  multiOneAdi =
+                                                      selectedItemMulti;
+                                                },
+                                                validator: (value) {
+                                                  if (value == null ||
+                                                      value.isEmpty) {
+                                                    return 'Bu alanı seçmek zorunludur';
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
                                             ),
                                           ),
-                                         
                                           SizedBox(
                                             height: 20,
                                           ),
@@ -712,94 +776,101 @@ class _FiyatTahminState extends State<FiyatTahmin> {
                                     SizedBox(
                                       width: width * 1,
                                       height: 55,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 0,
-                                          backgroundColor: Constant.blueOne,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        onPressed: () async {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            var response = 4;
-                                            //     await myServer.startServer(
-                                            //   marka,
-                                            //   model,
-                                            //   tip,
-                                            //   origin,
-                                            //   drive,
-                                            //   double.parse(motor.text),
-                                            //   double.parse(silindir.text),
-                                            //   double.parse(beygir.text),
-                                            //   double.parse(sehir.text),
-                                            //   double.parse(otoyol.text),
-                                            // );
+                                      child: !isLoading
+                                          ? ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                backgroundColor:
+                                                    Constant.blueOne,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  isLoading = true;
+                                                });
 
-                                            // Yanıtı kullanabilirsiniz
-                                            //print(response.body);
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  var response =
+                                                      await sendData();
+                                                  setState(() {
+                                                    isLoading = false;
+                                                  });
 
-                                            // Sunucuyu durdurmak için
-                                            // await myServer.stopServer();
-                                            if (widget.category == 'car') {
-                                              _openDialogTwo(
-                                                  context,
-                                                  response,
-                                                  markaAdi,
-                                                  modeladi,
-                                                  tipAdi,
-                                                  originAdi,
-                                                  driveAdi,
-                                                  motor.text,
-                                                  silindir.text,
-                                                  beygir.text,
-                                                  sehir.text,
-                                                  otoyol.text,
-                                                  widget.image,
-                                                  widget.imageURL,
-                                                  widget.category);
-                                            } else if (widget.category ==
-                                                'phone') {
-                                              _openDialogTf(
-                                                  context,
-                                                  response,
-                                                  markaAdi,
-                                                  modeladi,
-                                                  motor.text,
-                                                  silindir.text,
-                                                  beygir.text,
-                                                  sehir.text,
-                                                  widget.image,
-                                                  widget.imageURL,
-                                                  widget.category);
-                                            } else if (widget.category ==
-                                                'computer') {
-                                              _openDialogCp(
-                                                  context,
-                                                  response,
-                                                  motor.text,
-                                                  beygir.text,
-                                                  deceitOneAdi,
-                                                  sehir.text,
-                                                  silindir.text,
-                                                  otoyol.text,
-                                                  multiOne,
-                                                  widget.image,
-                                                  widget.imageURL,
-                                                  widget.category);
+                                                  print(
+                                                      response.body.toString());
+                                                  var responseBody =
+                                                      response.body.toString();
 
-
-                                                  //context, fiyat, ram, ekran, cd, hiz, hd,trend, multi, image,imageURL, kategori
-                                            }
-                                          }
-                                        },
-                                        child: Text(
-                                          "Fiyat Tahmini Yap",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
+                                                  // JSON metnini ayrıştırma
+                                                  var jsonData =
+                                                      json.decode(responseBody);
+                                                  // "price" anahtarının değerini almak
+                                                  var price = jsonData['price'];
+                                                  var integerValue =
+                                                      price.toInt();
+                                                  print(integerValue);
+                                                  print(price.toString());
+                                                  if (widget.category ==
+                                                      'car') {
+                                                    _openDialogTwo(
+                                                        context,
+                                                        integerValue,
+                                                        markaAdi,
+                                                        modeladi,
+                                                        tipAdi,
+                                                        originAdi,
+                                                        driveAdi,
+                                                        motor.text,
+                                                        silindir.text,
+                                                        beygir.text,
+                                                        sehir.text,
+                                                        otoyol.text,
+                                                        widget.image,
+                                                        widget.imageURL,
+                                                        widget.category);
+                                                  } else if (widget.category ==
+                                                      'phone') {
+                                                    _openDialogTf(
+                                                        context,
+                                                        integerValue,
+                                                        markaAdi,
+                                                        modeladi,
+                                                        motor.text,
+                                                        silindir.text,
+                                                        beygir.text,
+                                                        sehir.text,
+                                                        deceitOneAdi,
+                                                        widget.image,
+                                                        widget.imageURL,
+                                                        widget.category);
+                                                  } else if (widget.category ==
+                                                      'computer') {
+                                                    _openDialogCp(
+                                                        context,
+                                                        integerValue,
+                                                        motor.text,
+                                                        beygir.text,
+                                                        deceitOneAdi,
+                                                        sehir.text,
+                                                        silindir.text,
+                                                        otoyol.text,
+                                                        multiOne,
+                                                        widget.image,
+                                                        widget.imageURL,
+                                                        widget.category);
+                                                  }
+                                                }
+                                              },
+                                              child: Text(
+                                                "Fiyat Tahmini Yap",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                            )
+                                          : CircularProgressIndicator(),
                                     ),
                                     SizedBox(
                                       height: 40,
@@ -842,7 +913,7 @@ Future _openDialogTwo(context, fiyat, marka, model, type, origin, driveTrain,
               kategori: kategori,
             )));
 Future _openDialogTf(context, fiyat, marka, model, ram, onKamera, ekran, hafiza,
-        image, imageURL, kategori) =>
+        deceitOneAdi, image, imageURL, kategori) =>
     showDialog(
         barrierDismissible: false,
         barrierColor: Constant.popat,
@@ -855,12 +926,13 @@ Future _openDialogTf(context, fiyat, marka, model, ram, onKamera, ekran, hafiza,
               motor: ram,
               sehir: hafiza,
               silindir: onKamera,
+              yuzTanima: deceitOneAdi,
               image: image,
               imageURL: imageURL,
               kategori: kategori,
             )));
-Future _openDialogCp(context, fiyat, ram, ekran, cd, hiz, hd,trend, multi, image,
-        imageURL, kategori) =>
+Future _openDialogCp(context, fiyat, ram, ekran, cd, hiz, hd, trend, multi,
+        image, imageURL, kategori) =>
     showDialog(
         barrierDismissible: false,
         barrierColor: Constant.popat,
@@ -872,8 +944,8 @@ Future _openDialogCp(context, fiyat, ram, ekran, cd, hiz, hd,trend, multi, image
               sehir: hiz,
               silindir: hd,
               otoyol: trend,
-              cd:cd,
-              multi:multi,
+              cd: cd,
+              multi: multi,
               image: image,
               imageURL: imageURL,
               kategori: kategori,

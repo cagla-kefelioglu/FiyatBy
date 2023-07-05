@@ -56,7 +56,7 @@ class _CardComponentsState extends State<CardComponents> {
                 width: 5,
               ),
               Text(
-                "120£",
+                widget.data['fiyat'],
                 style: TextStyle(
                     color: Constant.dark, fontSize: 20, fontFamily: 'Poppins'),
               )

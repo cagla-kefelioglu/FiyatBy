@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class MyServer {
   HttpServer? _server;
 
-  Future<http.Response> startServer(
+  Future<dynamic> startServer(
     int make,
     int modell,
     int type,
@@ -19,11 +19,20 @@ class MyServer {
     double mPGCity,
     double mPGHighway,
   ) async {
-    _server = await HttpServer.bind('127.0.0.1', 8000);
+    _server = await HttpServer.bind('192.168.1.37', 8000);
     if (_server != null) {
       print('Sunucu dinleniyor: ${_server!.address}:${_server!.port}');
+      await http.Client().post(
+            Uri.parse('http://192.168.1.37:8000/'),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode({"deneme":"SAsdhfgsjhg"}),
+          );
+
+
+      //sıkıntı 
 
       await for (var request in _server!) {
+        print("DENEMEEE");
         try {
           var inputJson = await utf8.decoder.bind(request).join();
           var inputData = jsonDecode(inputJson);

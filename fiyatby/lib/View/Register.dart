@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, prefer_const_constructors, sort_child_properties_last, unnecessary_new, prefer_interpolation_to_compose_strings, avoid_print, prefer_const_literals_to_create_immutables, unused_element
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyatby/Constant/constant.dart';
@@ -6,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:grock/grock.dart';
 
 import '../Assets.dart';
+
+final _formKeyy = GlobalKey<FormState>();
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -21,16 +25,14 @@ class _RegisterState extends State<Register> {
     print(value.additionalUserInfo!.isNewUser.toString() + " yeni user mi ? ");
     print("objectt");
     FirebaseFirestore.instance.collection("Users").doc(value.user!.uid).set({
-      "products":{
-        "car":[],
-        "computer":[]
-      }
-           
+      "products": {"car": [], "computer": []}
     });
   }
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController passwordAgain = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -159,148 +161,184 @@ class _RegisterState extends State<Register> {
                                 ),
                                 Expanded(
                                   child: Form(
+                                      key: _formKeyy,
                                       child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
+                                        padding: EdgeInsets.all(10),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
-                                            SizedBox(
-                                              width: width * 1,
-                                              height: 50,
-                                              child: Container(
-                                                decoration: _boxDecoration,
-                                                child: TextFormField(
-                                                  decoration:
-                                                      _fiedlDecoration.copyWith(
-                                                    labelText: "Mail",
-                                                  ),
-                                                  controller: email,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            SizedBox(
-                                              width: width * 1,
-                                              height: 50,
-                                              child: Container(
-                                                decoration: _boxDecoration,
-                                                child: TextFormField(
-                                                  decoration: _fiedlDecoration,
-                                                  controller: password,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            SizedBox(
-                                              width: width * 1,
-                                              height: 50,
-                                              child: Container(
-                                                decoration: _boxDecoration,
-                                                child: TextFormField(
-                                                  decoration:
-                                                      _fiedlDecoration.copyWith(
-                                                    labelText: "Şifre Tekrarı",
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                  width: width * 1,
+                                                  height: 50,
+                                                  child: Container(
+                                                    decoration: _boxDecoration,
+                                                    child: TextFormField(
+                                                      decoration:
+                                                          _fiedlDecoration
+                                                              .copyWith(
+                                                        labelText: "Mail",
+                                                      ),
+                                                      controller: email,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            SizedBox(
-                                              width: width * 1,
-                                              height: 50,
-                                              child: ElevatedButton(
-                                                onPressed: () async {
-                                                  FirebaseAuth.instance
-                                                      .createUserWithEmailAndPassword(
-                                                          email: email.text,
-                                                          password:
-                                                              password.text)
-                                                      .then((value) async =>
-                                                          await saveUserData(
-                                                              value));
-                                                  Grock.toRemove(Login());
-                                                },
-                                                child: Text(
-                                                  "Kayıt Ol",
-                                                  style: TextStyle(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 25,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                SizedBox(
+                                                  height: 20,
                                                 ),
-                                                style: ElevatedButton.styleFrom(
-                                                    elevation: 0,
-                                                    backgroundColor:
-                                                        Constant.blueOne,
-                                                    shape:
-                                                        new RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          new BorderRadius
-                                                              .circular(10),
-                                                    )),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              width: width * 1,
-                                              height: 50,
-                                              child: ElevatedButton(
-                                                onPressed: () {},
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      Assets.images.img4,
-                                                      width: 30,
+                                                SizedBox(
+                                                  width: width * 1,
+                                                  height: 50,
+                                                  child: Container(
+                                                    decoration: _boxDecoration,
+                                                    child: TextFormField(
+                                                      decoration:
+                                                          _fiedlDecoration,
+                                                      controller: password,
                                                     ),
-                                                    SizedBox(
-                                                      width: 10,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                SizedBox(
+                                                  width: width * 1,
+                                                  height: 50,
+                                                  child: Container(
+                                                    decoration: _boxDecoration,
+                                                    child: TextFormField(
+                                                      controller: passwordAgain,
+                                                      decoration:
+                                                          _fiedlDecoration
+                                                              .copyWith(
+                                                        labelText:
+                                                            "Şifre Tekrarı",
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      "Google ile kayıt ol",
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                SizedBox(
+                                                  width: width * 1,
+                                                  height: 50,
+                                                  child: ElevatedButton(
+                                                    onPressed: () async {
+                                                      if (password
+                                                              .text.isEmpty ||
+                                                          passwordAgain
+                                                              .text.isEmpty) {
+                                                        // Şifre alanlarından biri veya her ikisi de boşsa, hata mesajı göster
+                                                        print(
+                                                            "Şifre alanları boş bırakılamaz.");
+                                                      } else if (password
+                                                              .text !=
+                                                          passwordAgain.text) {
+                                                        // Şifreler uyuşmuyorsa, hata mesajı göster
+                                                        print(
+                                                            "Şifreler eşleşmiyor.");
+                                                      } else if (password
+                                                              .text.length <
+                                                          6) {
+                                                        // Şifre minimum 6 karakter olmalı, değilse hata mesajı göster
+                                                        print(
+                                                            "Şifre minimum 6 karakter olmalıdır.");
+                                                      } else {
+                                                        FirebaseAuth.instance
+                                                            .createUserWithEmailAndPassword(
+                                                                email:
+                                                                    email.text,
+                                                                password:
+                                                                    password
+                                                                        .text)
+                                                            .then((value) async =>
+                                                                await saveUserData(
+                                                                    value));
+                                                        Grock.toRemove(Login());
+                                                      }
+                                                    },
+                                                    child: Text(
+                                                      "Kayıt Ol",
                                                       style: TextStyle(
                                                           fontFamily: 'Poppins',
-                                                          fontSize: 16,
+                                                          fontSize: 25,
                                                           fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Constant.dark),
+                                                              FontWeight.bold),
                                                     ),
-                                                  ],
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            elevation: 0,
+                                                            backgroundColor:
+                                                                Constant
+                                                                    .blueOne,
+                                                            shape:
+                                                                new RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  new BorderRadius
+                                                                      .circular(10),
+                                                            )),
+                                                  ),
                                                 ),
-                                                style: ElevatedButton.styleFrom(
-                                                    elevation: 0,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    side: const BorderSide(
-                                                        width: 2,
-                                                        color:
-                                                            Constant.blueOne),
-                                                    shape:
-                                                        new RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          new BorderRadius
-                                                              .circular(10),
-                                                    )),
-                                              ),
-                                            )
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                SizedBox(
+                                                  width: width * 1,
+                                                  height: 50,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    child: Row(
+                                                      children: [
+                                                        Image.asset(
+                                                          Assets.images.img4,
+                                                          width: 30,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          "Google ile kayıt ol",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: Constant
+                                                                  .dark),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            elevation: 0,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            side: const BorderSide(
+                                                                width: 2,
+                                                                color: Constant
+                                                                    .blueOne),
+                                                            shape:
+                                                                new RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  new BorderRadius
+                                                                      .circular(10),
+                                                            )),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                  )),
+                                      )),
                                 )
                               ]),
                             ),

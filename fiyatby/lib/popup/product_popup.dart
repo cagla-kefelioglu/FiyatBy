@@ -216,7 +216,7 @@ class ProductsPopat extends StatelessWidget {
                                                   .doc(FirebaseAuth.instance
                                                       .currentUser!.uid)
                                                   .update({
-                                                "computer": FieldValue.arrayRemove(
+                                                "computers": FieldValue.arrayRemove(
                                                     [data])
                                               });
                                               }

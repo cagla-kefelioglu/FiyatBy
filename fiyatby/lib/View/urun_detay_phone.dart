@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, prefer_const_constructors, unused_element, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, must_be_immutable, prefer_typing_uninitialized_variables, camel_case_types
+// ignore_for_file: unused_import, prefer_const_constructors, unused_element, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, use_key_in_widget_constructors, must_be_immutable, prefer_typing_uninitialized_variables, camel_case_types, unrelated_type_equality_checks
 
 import 'package:fiyatby/Constant/constant.dart';
 import 'package:fiyatby/components/card.dart';
@@ -104,6 +104,11 @@ class _DetailPhoneProductsState extends State<DetailPhoneProducts> {
                                   infoElements(
                                       text: 'Ram: ',
                                       data: widget.data['ram'].toString()),
+                                  infoElements(
+                                      text: 'Yüz tanıma: ',
+                                      data: widget.data['yuzTanima'] == 1
+                                          ? "Var"
+                                          : "Yok"),
                                   SizedBox(
                                     height: 30,
                                   ),

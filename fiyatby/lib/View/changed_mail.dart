@@ -1,108 +1,133 @@
 // ignore_for_file: unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:fiyatby/Assets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiyatby/Constant/constant.dart';
 import 'package:fiyatby/View/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:grock/grock.dart';
 
 class MailDegis extends StatefulWidget {
-  const MailDegis({super.key});
+  const MailDegis({Key? key});
 
   @override
   State<MailDegis> createState() => _MailDegisState();
 }
 
 class _MailDegisState extends State<MailDegis> {
+  TextEditingController Newpassword = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
-    child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: width * 1,
-            height: height*1,
-            decoration: BoxDecoration(
-              color: Constant.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: height * 0.15,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: width * 1,
+              height: height * 1,
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: height * 0.15,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Profil ",
+                            style: _textStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Column(
                       children: [
-                        Text(
-                          "Profil ",
-                          style: _textStyle,
-                        )
+                        SizedBox(
+                          width: width * 1,
+                          height: 50,
+                          child: Container(
+                            decoration: _boxDecoration,
+                            child: TextFormField(
+                              controller: password,
+                              decoration: _fiedlDecoration.copyWith(
+                                labelText: "Eski mailiniz",
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: width * 1,
+                          height: 50,
+                          child: Container(
+                            decoration: _boxDecoration,
+                            child: TextFormField(
+                              controller: Newpassword,
+                              decoration: _fiedlDecoration.copyWith(
+                                labelText: "Yeni mailiniz",
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        SizedBox(
+                          width: width * 1,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onPressed: () {
+                              String currentEmail = password.text;
+                                  
+                              String newEmail = Newpassword.text;
+
+                              if (currentEmail == newEmail) {
+                                print(
+                                    "Yeni e-posta adresi mevcut e-posta adresiyle aynı.");
+                              } else {
+                                FirebaseAuth.instance.currentUser!
+                                    .updateEmail(newEmail)
+                                    .then((_) {
+                                  print(
+                                      "E-posta adresi başarıyla güncellendi.");
+                                  Grock.to(Profile());
+                                }).catchError((error) {
+                                  print(
+                                      "E-posta adresi güncellenirken bir hata oluştu: $error");
+                                });
+                              }
+                            },
+                            child: Text("Maili Değiştir"),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: width * 1,
-                        height: 50,
-                        child: Container(
-                          decoration: _boxDecoration,
-                          child: TextFormField(
-                            decoration: _fiedlDecoration.copyWith(
-                              labelText: "Eski mailiniz",
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SizedBox(
-                        width: width * 1,
-                        height: 50,
-                        child: Container(
-                          decoration: _boxDecoration,
-                          child:
-                              TextFormField(decoration: _fiedlDecoration),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      SizedBox(
-                        width: width * 1,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: Constant.blueOne,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          onPressed: () {Grock.to(Profile());},
-                          child: Text("Maili Değiştir"),
-                        ),
-                      ),
-                    
-                  
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
