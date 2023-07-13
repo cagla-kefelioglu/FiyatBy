@@ -1,0 +1,689 @@
+Tip
+
+['SUV' 'Sedan' 'Sports' 'Wagon' 'Truck' 'Hybrid']
+
+Hybrid -> 0
+SUV -> 1
+Sedan -> 2
+Sports -> 3
+Truck -> 4
+Wagon -> 5
+
+
+Mekanizasyon
+['All' 'Front' 'Rear']
+
+All -> 0
+Front -> 1
+Rear -> 2
+_____________________________________________________________________________
+
+Markalar
+
+['Acura' 'Audi' 'BMW' 'Buick' 'Cadillac' 'Chevrolet' 'Chrysler' 'Dodge'
+ 'Ford' 'GMC' 'Honda' 'Hummer' 'Hyundai' 'Infiniti' 'Isuzu' 'Jaguar'
+ 'Jeep' 'Kia' 'Land Rover' 'Lexus' 'Lincoln' 'MINI' 'Mazda'
+ 'Mercedes-Benz' 'Mercury' 'Mitsubishi' 'Nissan' 'Oldsmobile' 'Pontiac'
+ 'Porsche' 'Saab' 'Saturn' 'Scion' 'Subaru' 'Suzuki' 'Toyota' 'Volkswagen'
+ 'Volvo']
+Acura -> 0
+Audi -> 1
+BMW -> 2
+Buick -> 3
+Cadillac -> 4
+Chevrolet -> 5
+Chrysler -> 6
+Dodge -> 7
+Ford -> 8
+GMC -> 9
+Honda -> 10
+Hummer -> 11
+Hyundai -> 12
+Infiniti -> 13
+Isuzu -> 14
+Jaguar -> 15
+Jeep -> 16
+Kia -> 17
+Land Rover -> 18
+Lexus -> 19
+Lincoln -> 20
+MINI -> 21
+Mazda -> 22
+Mercedes-Benz -> 23
+Mercury -> 24
+Mitsubishi -> 25
+Nissan -> 26
+Oldsmobile -> 27
+Pontiac -> 28
+Porsche -> 29
+Saab -> 30
+Saturn -> 31
+Scion -> 32
+Subaru -> 33
+Suzuki -> 34
+Toyota -> 35
+Volkswagen -> 36
+Volvo -> 37
+
+_____________________________________________________________________________
+
+Üretim yeri
+['Asia' 'Europe' 'USA']
+
+Asia -> 0
+Europe -> 1
+USA -> 2
+
+_____________________________________________________________________________
+
+Markalara göre modeller
+
+Marka: Mercedes-Benz
+                              Model  Modelcoded
+268                        S500 4dr         314
+251                            G500         170
+267                        S430 4dr         313
+276                            E500         132
+266                        E500 4dr         133
+273                   SLK32 AMG 2dr         325
+264  CLK500 coupe 2dr (convertible)          86
+260                     C32 AMG 4dr          78
+275                            E320         130
+265                        E320 4dr         131
+252                           ML500         229
+263  CLK320 coupe 2dr (convertible)          85
+272          SLK230 convertible 2dr         324
+259                        C320 4dr          79
+258                        C320 4dr          79
+257                  C320 Sport 4dr          81
+274                            C240          76
+256                        C240 4dr          77
+255                        C240 4dr          77
+254                  C320 Sport 2dr          80
+253                  C230 Sport 2dr          75
+262                       CL600 2dr          84
+271           SL600 convertible 2dr         323
+270                    SL55 AMG 2dr         322
+
+Marka: Audi
+                               Model  Modelcoded
+20                          RS 6 4dr         290
+18                  A8 L Quattro 4dr          44
+17                A6 4.2 Quattro 4dr          43
+25                  S4 Avant Quattro         310
+19                    S4 Quattro 4dr         311
+15    A4 3.0 Quattro convertible 2dr          36
+16          A6 2.7 Turbo Quattro 4dr          39
+14            A4 3.0 convertible 2dr          37
+24              A6 3.0 Avant Quattro          41
+23    TT 3.2 coupe 2dr (convertible)         366
+13                A6 3.0 Quattro 4dr          42
+22  TT 1.8 Quattro 2dr (convertible)         364
+12                        A6 3.0 4dr          40
+21    TT 1.8 convertible 2dr (coupe)         365
+8             A41.8T convertible 2dr          38
+11           A4 3.0 Quattro 4dr auto          34
+10         A4 3.0 Quattro 4dr manual          35
+9                         A4 3.0 4dr          33
+7                        A4 1.8T 4dr          32
+
+Marka: Porsche
+                                   Model  Modelcoded
+332   911 Carrera 4S coupe 2dr (convert)          28
+331  911 Carrera convertible 2dr (coupe)          29
+333                  911 Targa coupe 2dr          31
+330                            Cayenne S         100
+336            Boxster S convertible 2dr          73
+335              Boxster convertible 2dr          74
+334                          911 GT2 2dr          30
+
+Marka: Jaguar
+                   Model  Modelcoded
+199        XKR coupe 2dr         407
+198  XK8 convertible 2dr         405
+196              XJR 4dr         404
+197        XK8 coupe 2dr         406
+194      Vanden Plas 4dr         388
+193         S-Type R 4dr         308
+195              XJ8 4dr         403
+192       S-Type 4.2 4dr         307
+191       S-Type 3.0 4dr         306
+190       X-Type 3.0 4dr         396
+189       X-Type 2.5 4dr         395
+
+Marka: Dodge
+                            Model  Modelcoded
+114  Viper SRT-10 convertible 2dr         392
+113             Grand Caravan SXT         180
+105                   Durango SLT         129
+111               Intrepid ES 4dr         200
+108               Intrepid SE 4dr         201
+112                    Caravan SE          96
+116               Dakota Club Cab         123
+110                Stratus SE 4dr         357
+117       Ram 1500 Regular Cab ST         296
+109               Stratus SXT 4dr         358
+115            Dakota Regular Cab         124
+107                  Neon SXT 4dr         257
+106                   Neon SE 4dr         256
+
+Marka: Cadillac
+                  Model  Modelcoded
+61  XLR convertible 2dr         409
+62         Escalade EXT         147
+55             Escalade         146
+59      Deville DTS 4dr         126
+60      Seville SLS 4dr         342
+56               SRX V8         326
+58          Deville 4dr         125
+57          CTS VVT 4dr          88
+
+Marka: Volkswagen
+                              Model  Modelcoded
+412                 Phaeton W12 4dr         283
+411                     Phaeton 4dr         282
+415                       Passat W8         278
+410           Passat W8 4MOTION 4dr         279
+401                      Touareg V6         375
+409       Passat GLX V6 4MOTION 4dr         277
+414                 Passat GLS 1.8T         275
+408                  Passat GLS 4dr         276
+406               Jetta GLI VR6 4dr         204
+407  New Beetle GLS convertible 2dr         259
+404               Jetta GLS TDI 4dr         205
+405         New Beetle GLS 1.8T 2dr         258
+403              GTI 1.8T 2dr hatch         173
+413                        Jetta GL         203
+402                    Golf GLS 4dr         178
+
+Marka: BMW
+                      Model  Modelcoded
+40                745Li 4dr          19
+39                 745i 4dr          20
+42       M3 convertible 2dr         225
+38                545iA 4dr          18
+27                  X5 4.4i         398
+41             M3 coupe 2dr         226
+37                 530i 4dr          17
+36    330Ci convertible 2dr          10
+44  Z4 convertible 3.0i 2dr         414
+35                 525i 4dr          16
+30    325Ci convertible 2dr           5
+34                330xi 4dr          12
+26                  X3 3.0i         397
+33                330Ci 2dr           9
+32                 330i 4dr          11
+43  Z4 convertible 2.5i 2dr         413
+45              325xi Sport           8
+29                325Ci 2dr           4
+31                325xi 4dr           7
+28                 325i 4dr           6
+
+Marka: Land Rover
+               Model  Modelcoded
+215  Range Rover HSE         297
+216     Discovery SE         128
+217    Freelander SE         165
+
+Marka: Lexus
+                      Model  Modelcoded
+219                  LX 470         213
+227  SC 430 convertible 2dr         321
+226              LS 430 4dr         208
+225              GS 430 4dr         172
+218                  GX 470         175
+224              GS 300 4dr         171
+220                  RX 330         292
+228       IS 300 SportCross         192
+223         IS 300 4dr auto         190
+221              ES 330 4dr         134
+222       IS 300 4dr manual         191
+
+Marka: Toyota
+                          Model  Modelcoded
+377                Land Cruiser         219
+374                 Sequoia SR5         341
+392              Avalon XLS 4dr          64
+394          Sienna XLE Limited         344
+376               Highlander V6         188
+375              4Runner SR5 V6          15
+389               Avalon XL 4dr          63
+391     Camry Solara SLE V6 2dr          93
+399    Tundra Access Cab V6 SR5         384
+390            Camry XLE V6 4dr          94
+396  MR2 Spyder convertible 2dr         231
+393                   Sienna CE         343
+386             Camry LE V6 4dr          90
+395             Celica GT-S 2dr         101
+388      Camry Solara SE V6 2dr          92
+373    Prius 4dr (gas/electric)         285
+378                        RAV4         289
+387         Camry Solara SE 2dr          91
+385                Camry LE 4dr          89
+400                   Matrix XR         239
+398       Tundra Regular Cab V6         385
+381              Corolla LE 4dr         115
+380               Corolla S 4dr         116
+379              Corolla CE 4dr         114
+397                      Tacoma         367
+383               Echo 2dr auto         135
+384                    Echo 4dr         137
+382             Echo 2dr manual         136
+
+Marka: Lincoln
+                       Model  Modelcoded
+229         Navigator Luxury         255
+237  Town Car Ultimate L 4dr         378
+236    Town Car Ultimate 4dr         377
+234       LS V8 Ultimate 4dr         212
+230         Aviator Ultimate          67
+235   Town Car Signature 4dr         376
+233          LS V8 Sport 4dr         211
+232        LS V6 Premium 4dr         210
+231         LS V6 Luxury 4dr         209
+
+Marka: Infiniti
+                   Model  Modelcoded
+184       Q45 Luxury 4dr         286
+183              M45 4dr         227
+186                 FX45         155
+185                 FX35         154
+181              G35 4dr         168
+182              I35 4dr         189
+180  G35 Sport Coupe 2dr         169
+179              G35 4dr         168
+
+Marka: Chevrolet
+                         Model  Modelcoded
+83    Corvette convertible 2dr         118
+82                Corvette 2dr         117
+63            Suburban 1500 LT         359
+88                         SSR         327
+64                    Tahoe LT         368
+87                Silverado SS         349
+84              Avalanche 1500          62
+65              TrailBlazer LT         382
+77               Impala SS 4dr         195
+81                  Venture LS         389
+80                       Astro          61
+76               Impala LS 4dr         194
+79          Monte Carlo SS 2dr         248
+78               Malibu LT 4dr         236
+89              Malibu Maxx LS         237
+72                  Impala 4dr         193
+75          Monte Carlo LS 2dr         247
+74               Malibu LS 4dr         235
+86  Silverado 1500 Regular Cab         348
+66                     Tracker         381
+73                  Malibu 4dr         234
+85                Colorado Z85         109
+71             Cavalier LS 2dr          99
+70                Cavalier 4dr          98
+69                Cavalier 2dr          97
+68           Aveo LS 4dr hatch          66
+67                    Aveo 4dr          65
+
+Marka: Hummer
+    Model  Modelcoded
+166    H2         187
+
+Marka: GMC
+                         Model  Modelcoded
+143          Yukon XL 2500 SLT         412
+142             Yukon 1500 SLE         411
+141              Envoy XUV SLE         145
+147             Sierra HD 2500         346
+146   Sierra Extended Cab 1500         345
+144                 Safari SLE         331
+148            Sonoma Crew Cab         352
+145  Canyon Z85 SL Regular Cab          95
+
+Marka: Acura
+                     Model  Modelcoded
+5  3.5 RL w/Navigation 4dr           1
+4               3.5 RL 4dr           0
+0                      MDX         228
+3                   TL 4dr         362
+2                  TSX 4dr         363
+1           RSX Type S 2dr         291
+
+Marka: Volvo
+                       Model  Modelcoded
+425               S80 T6 4dr         320
+424  C70 HPT convertible 2dr          82
+416                  XC90 T6         400
+423  C70 LPT convertible 2dr          83
+422             S80 2.5T 4dr         318
+421              S80 2.9 4dr         319
+420                S60 R 4dr         316
+427                     XC70         399
+419               S60 T5 4dr         317
+418              S60 2.5 4dr         315
+426                      V40         386
+417                  S40 4dr         312
+
+Marka: Saab
+                        Model  Modelcoded
+342  9-3 Aero convertible 2dr          22
+343                  9-5 Aero          25
+341   9-3 Arc convertible 2dr          24
+340              9-5 Aero 4dr          26
+339               9-5 Arc 4dr          27
+338              9-3 Aero 4dr          21
+337         9-3 Arc Sport 4dr          23
+
+Marka: Ford
+                                       Model  Modelcoded
+118                        Excursion 6.8 XLT         149
+135  Thunderbird Deluxe convert w/hardtop 2d         372
+119                       Expedition 4.6 XLT         150
+137                    F-150 Supercab Lariat         153
+131              Crown Victoria LX Sport 4dr         122
+120                          Explorer XLT V6         151
+134       Mustang GT Premium convertible 2dr         254
+130                    Crown Victoria LX 4dr         121
+132                              Freestar SE         166
+129                       Crown Victoria 4dr         120
+128                   Taurus SES Duratec 4dr         371
+121                               Escape XLS         148
+140                                Taurus SE         370
+136                     F-150 Regular Cab XL         152
+127                            Taurus LX 4dr         369
+126                            Focus SVT 2dr         158
+133                Mustang 2dr (convertible)         253
+139                                Focus ZTW         159
+125                            Focus ZX5 5dr         161
+124                             Focus SE 4dr         157
+138                Ranger 2.3 XL Regular Cab         298
+123                             Focus LX 4dr         156
+122                      Focus ZX3 2dr hatch         160
+
+Marka: Buick
+                    Model  Modelcoded
+54  Park Avenue Ultra 4dr         274
+46                Rainier         295
+53        Park Avenue 4dr         273
+52    LeSabre Limited 4dr         221
+51           Regal GS 4dr         299
+47          Rendezvous CX         301
+49     LeSabre Custom 4dr         220
+50           Regal LS 4dr         300
+48     Century Custom 4dr         102
+
+Marka: Chrysler
+                               Model  Modelcoded
+102         Town and Country Limited         380
+103                    Crossfire 2dr         119
+99          300M Special Edition 4dr           3
+104                         Pacifica         272
+100  Sebring Limited convertible 2dr         334
+94                          300M 4dr           2
+101              Town and Country LX         379
+96                  Concorde LXi 4dr         111
+97                 PT Cruiser GT 4dr         270
+98           Sebring convertible 2dr         336
+95                   Concorde LX 4dr         110
+91            PT Cruiser Limited 4dr         271
+93               Sebring Touring 4dr         335
+92                       Sebring 4dr         333
+90                    PT Cruiser 4dr         269
+
+Marka: Pontiac
+                  Model  Modelcoded
+325  Bonneville GXP 4dr          72
+328             GTO 2dr         174
+327         Montana EWB         246
+324  Grand Prix GT2 4dr         186
+326             Montana         245
+321     Grand Am GT 2dr         179
+322  Grand Prix GT1 4dr         185
+319              Aztekt          68
+323     Sunfire 1SC 2dr         361
+329                Vibe         391
+320     Sunfire 1SA 2dr         360
+
+Marka: Mercury
+                             Model  Modelcoded
+283                   Marauder 4dr         238
+284                Monterey Luxury         249
+282  Grand Marquis LS Ultimate 4dr         184
+277                    Mountaineer         251
+280   Grand Marquis LS Premium 4dr         183
+279           Grand Marquis GS 4dr         182
+281           Sable LS Premium 4dr         330
+285                       Sable GS         328
+278                   Sable GS 4dr         329
+
+Marka: Nissan
+                               Model  Modelcoded
+312  350Z Enthusiast convertible 2dr          13
+299             Pathfinder Armada SE         280
+310                         Quest SE         288
+308                    Maxima SL 4dr         241
+315                        Murano SL         252
+307                    Maxima SE 4dr         240
+300                    Pathfinder SE         281
+311                   350Z coupe 2dr          14
+314                Titan King Cab XE         374
+309                          Quest S         287
+306                    Altima SE 4dr          58
+301                     Xterra XE V6         410
+313          Frontier King Cab XE V6         167
+304                     Altima S 4dr          57
+305                  Sentra SE-R 4dr         340
+303                 Sentra 1.8 S 4dr         339
+302                   Sentra 1.8 4dr         338
+
+Marka: Honda
+                                      Model  Modelcoded
+165                   S2000 convertible 2dr         309
+151                                Pilot LX         284
+164                              Odyssey EX         260
+162                        Accord EX V6 2dr          49
+163                              Odyssey LX         261
+161                        Accord LX V6 4dr          51
+158                           Accord EX 2dr          48
+149  Civic Hybrid 4dr manual (gas/electric)         106
+152                                 CR-V LX          87
+157                           Accord LX 2dr          50
+160                      Civic Si 2dr hatch         108
+150              Insight 2dr (gas/electric)         199
+153                              Element LX         143
+159                            Civic EX 4dr         104
+156                            Civic LX 4dr         107
+155                            Civic HX 2dr         105
+154                            Civic DX 2dr         103
+
+Marka: Mitsubishi
+                                 Model  Modelcoded
+287                        Montero XLS         250
+286                       Endeavor XLS         144
+297               Lancer Evolution 4dr         215
+293                    Diamante LS 4dr         127
+296  Eclipse Spyder GT convertible 2dr         139
+294                     Galant GTS 4dr         177
+295                    Eclipse GTS 2dr         138
+291                 Galant ES 2.4L 4dr         176
+288                       Outlander LS         268
+298                Lancer Sportback LS         218
+292           Lancer OZ Rally 4dr auto         217
+290                      Lancer LS 4dr         216
+289                      Lancer ES 4dr         214
+
+Marka: Isuzu
+          Model  Modelcoded
+187  Ascender S          60
+188     Rodeo S         305
+
+Marka: Subaru
+                         Model  Modelcoded
+359        Outback H-6 VDC 4dr         265
+361        Impreza WRX STi 4dr         198
+358             Outback H6 4dr         266
+357  Outback Limited Sedan 4dr         267
+356              Legacy GT 4dr         222
+360            Impreza WRX 4dr         197
+362                       Baja          71
+364                    Outback         264
+363                 Forester X         164
+355               Legacy L 4dr         223
+354         Impreza 2.5 RS 4dr         196
+
+Marka: Oldsmobile
+             Model  Modelcoded
+318  Silhouette GL         347
+317  Alero GLS 2dr          55
+316   Alero GX 2dr          56
+
+Marka: Mazda
+                             Model  Modelcoded
+244                         MPV ES         230
+248                RX-8 4dr manual         294
+247             RX-8 4dr automatic         293
+246  MX-5 Miata LS convertible 2dr         232
+245     MX-5 Miata convertible 2dr         233
+250              B4000 SE Cab Plus          70
+240                 Tribute DX 2.0         383
+243                   Mazda6 i 4dr         244
+242                   Mazda3 s 4dr         243
+241                   Mazda3 i 4dr         242
+249           B2300 SX Regular Cab          69
+
+Marka: Jeep
+                               Model  Modelcoded
+201            Grand Cherokee Laredo         181
+203  Wrangler Sahara convertible 2dr         394
+202                    Liberty Sport         224
+
+Marka: Hyundai
+                    Model  Modelcoded
+177           XG350 L 4dr         402
+176             XG350 4dr         401
+167          Santa Fe GLS         332
+175         Sonata LX 4dr         351
+174        Sonata GLS 4dr         350
+178     Tiburon GT V6 2dr         373
+173  Elantra GT 4dr hatch         142
+172        Elantra GT 4dr         141
+171       Elantra GLS 4dr         140
+170   Accent GT 2dr hatch          47
+169         Accent GL 4dr          46
+168      Accent 2dr hatch          45
+
+Marka: Kia
+                     Model  Modelcoded
+212             Amanti 4dr          59
+213              Sedona LX         337
+204             Sorento LX         353
+211       Optima LX V6 4dr         263
+205          Optima LX 4dr         262
+210  Spectra GSX 4dr hatch         356
+209   Spectra GS 4dr hatch         355
+208            Spectra 4dr         354
+214              Rio Cinco         304
+207           Rio 4dr auto         302
+206         Rio 4dr manual         303
+
+Marka: Suzuki
+              Model  Modelcoded
+365         XL-7 EX         408
+371   Verona LX 4dr         390
+366       Vitara LX         393
+372        Aerio SX          54
+370  Forenza EX 4dr         162
+368    Aerio LX 4dr          53
+367      Aeno S 4dr          52
+369   Forenza S 4dr         163
+
+Marka: Saturn
+                   Model  Modelcoded
+351               L300 2         206
+350           L300-2 4dr         207
+344                  VUE         387
+349  lon3 quad coupe 2dr         418
+347             lon3 4dr         417
+348  lon2 quad coupe 2dr         416
+346             lon2 4dr         415
+345             Ion1 4dr         202
+
+Marka: MINI
+        Model  Modelcoded
+239  Cooper S         113
+238    Cooper         112
+
+Marka: Scion
+            Model  Modelcoded
+353            xB         420
+352  xA 4dr hatch         419
+
+___________________________________________________________________________
+
+BİLGİSAYAR İÇİN VERİLER
+
+
+
+// class MyModelRunner {
+//   var category;
+
+//   MyModelRunner(this.category);
+//   Interpreter? interpreter;
+
+//   Future<void> loadModel() async {
+//     String modelPath;
+
+//     modelPath = category == 'Araba'
+//         ? 'assets/models/model.tflite'
+//         : 'assets/models/model.tflite'; //model yüklenir
+
+//     interpreter = await Interpreter.fromAsset(modelPath); //nesne oluşturulur
+//   }
+
+// //model çalıştırılır
+//   double runModel(List<double> input) {
+//     //input, modelin giriş verilerini temsil eder
+//     List<List<double>> inputList = [input];
+
+//     List<Tensor> outputTensors = interpreter!.getOutputTensors();
+//     List<List<double>> outputList = List.generate(
+//       outputTensors.length,
+//       (index) => List<double>.filled(
+//         outputTensors[index].shape.reduce((a, b) => a * b),
+//         0.0,
+//       ),
+//     );
+
+//     interpreter!.runForMultipleInputs([inputList], outputList.asMap());
+
+//     // Çıkış listesini düz bir liste haline getirin
+//     List<double> flattenedOutputList =
+//         outputList.expand((list) => list).toList();
+//     double price = flattenedOutputList[0];
+
+//     return price;
+//   }
+
+//   void closeModel() {
+//     interpreter!.close();
+//   }
+// }
+
+
+
+
+
+ // void initState() {
+  //   super.initState();
+  //   loadModel();
+  //   MyModelRunner modelRunner = MyModelRunner(widget.category);
+  // }
+
+  // Future<void> loadModel() async {
+  //   await modelRunner!.loadModel();
+  //   setState(() {
+  //     modelLoaded = true;
+  //   });
+  // }
+
+
+
+

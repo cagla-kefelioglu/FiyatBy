@@ -1,0 +1,195 @@
+modeller
+
+Marka: Apple
+                         model  Modelcoded
+0     Apple  iPhone 12 Pro Max           7
+1     Apple  iPhone 12 Pro Max           7
+3         Apple  iPhone 12 Pro           6
+4         Apple  iPhone 12 Pro           6
+5     Apple  iPhone 12 Pro Max           7
+...                        ...         ...
+1026            Apple iPhone 6          30
+1027            Apple iPhone 6          30
+1028            Apple iPhone 6          30
+1029            Apple iPhone 6          30
+1030            Apple iPhone 6          30
+
+[553 rows x 2 columns]
+
+Marka: Samsung
+                          model  Modelcoded
+2              Samsung   Note 9         113
+6         Samsung   SM-A920F A9         115
+7        Samsung   SM-A325F A32         114
+10      Samsung   Galaxy Note 9          94
+13   Samsung   SM-A920F A9 2018         116
+..                          ...         ...
+977          Samsung Galaxy A11         131
+978          Samsung Galaxy A11         131
+979          Samsung Galaxy A02         127
+994          Samsung Galaxy A10         130
+999          Samsung Galaxy A10         130
+
+[364 rows x 2 columns]
+
+Marka: Xiaomi
+                         model  Modelcoded
+14       Xiaomi   Redmi Note 9         179
+36           Xiaomi   Redmi 9T         175
+64    Xiaomi   Mi Note 10 Lite         173
+75           Xiaomi   Redmi 9T         175
+76       Xiaomi   Redmi Note 8         177
+82       Xiaomi   Redmi Note 8         177
+83         Xiaomi   Mi 11 Lite         171
+112         Xiaomi   Mi 8 Lite         172
+118      Xiaomi   Redmi Note 8         177
+135          Xiaomi   Redmi 9T         175
+136     Xiaomi   Redmi Note 9S         181
+138  Xiaomi   Redmi Note 9 Pro         180
+146  Xiaomi   Redmi Note 8 Pro         178
+181  Xiaomi   Redmi Note 9 Pro         180
+182  Xiaomi   Redmi Note 8 Pro         178
+187      Xiaomi   Redmi Note 9         179
+209          Xiaomi   Redmi 9T         175
+234         Xiaomi   Mi 8 Lite         172
+237         Xiaomi   Redmi 10s         174
+260      Xiaomi   Redmi Note 8         177
+267          Xiaomi   Redmi 9T         175
+280      Xiaomi   Redmi Note 8         177
+302      Xiaomi   Redmi Note 8         177
+304      Xiaomi   Redmi Note 7         176
+342         Xiaomi   Mi 8 Lite         172
+380          Xiaomi   Redmi 9T         175
+441         Xiaomi   Mi 8 Lite         172
+451         Xiaomi   Mi 8 Lite         172
+734         Xiaomi Poco X3 NFC         183
+747    Xiaomi Redmi Note 9 Pro         188
+758    Xiaomi Redmi Note 9 Pro         188
+766       Xiaomi Redmi Note 10         185
+767         Xiaomi Poco M3 Pro         182
+782       Xiaomi Redmi Note 9S         189
+783    Xiaomi Redmi Note 8 Pro         186
+819       Xiaomi Redmi Note 9S         189
+839    Xiaomi Redmi Note 8 Pro         186
+840    Xiaomi Redmi Note 8 Pro         186
+852    Xiaomi Redmi Note 8 Pro         186
+853    Xiaomi Redmi Note 8 Pro         186
+854    Xiaomi Redmi Note 8 Pro         186
+867        Xiaomi Redmi Note 9         187
+894            Xiaomi Redmi 9T         184
+899        Xiaomi Redmi Note 9         187
+
+Marka: Vestel
+                 model  Modelcoded
+61   Vestel   Venüs V6         170
+273  Vestel   Venüs V6         170
+
+Marka: Huawei
+                     model  Modelcoded
+143      Huawei   P30 Lite          45
+255      Huawei   P30 Lite          45
+362      Huawei   P30 Lite          45
+379      Huawei   P30 Lite          45
+438      Huawei   P40 Lite          46
+445  Huawei   Mate 10 Lite          42
+450  Huawei   Mate 20 Lite          43
+454  Huawei   Mate 20 Lite          43
+473      Huawei   P20 Lite          44
+484      Huawei   P20 Lite          44
+487  Huawei   Mate 10 Lite          42
+
+Marka: Oppo
+                    model  Modelcoded
+156             Oppo   A5          50
+173        Oppo   A5 2020          51
+193        Oppo   A9 2020          57
+216            Oppo   A91          58
+240             Oppo   A9          56
+275            Oppo   A72          53
+324         Oppo   Reno 4          60
+335            Oppo   A73          54
+341    Oppo   Reno 4 Lite          61
+345            Oppo   A74          55
+363            Oppo   A52          52
+375            Oppo   AX7          59
+417            Oppo   A91          58
+420           Oppo   A15s          49
+426            Oppo   A72          53
+428           Oppo   A15s          49
+437            Oppo   A91          58
+448     Oppo   Reno5 Lite          62
+463            Oppo   A72          53
+772              Oppo A52          67
+800              Oppo A52          67
+801              Oppo A52          67
+837               Oppo A5          65
+838               Oppo A5          65
+850          Oppo A5 2020          66
+851          Oppo A5 2020          66
+865          Oppo A5 2020          66
+866          Oppo A5 2020          66
+879               Oppo A5          65
+880               Oppo A5          65
+881               Oppo A9          69
+887             Oppo A15s          63
+888              Oppo AX7          70
+889              Oppo AX7          70
+895             Oppo A15s          63
+896              Oppo AX7          70
+897              Oppo AX7          70
+900             Oppo A15s          63
+901             Oppo A15s          63
+902              Oppo AX7          70
+903              Oppo AX7          70
+911              Oppo AX7          70
+912              Oppo AX7          70
+931  Oppo A31 64 GB Siyah          64
+980              Oppo A5s          68
+989              Oppo A5s          68
+
+Marka: Oneplus
+                     model  Modelcoded
+291  Oneplus   Nord N10 5G          48
+
+Marka: Realme
+             model  Modelcoded
+412  Realme   C25s          73
+462  Realme   C21Y          72
+480  Realme   C25s          73
+485   Realme   C15          71
+955      Realme 6i          74
+
+Marka: Tecno
+                model  Modelcoded
+756  Tecno Pova 128GB         169
+
+Marka: Omix
+         model  Modelcoded
+817  Omix X500          47
+818  Omix X500          47
+835  Omix X500          47
+836  Omix X500          47
+
+
+
+
+--------------------------------------
+markalar
+
+
+Apple -> 0
+Huawei -> 1
+Omix -> 2
+Oneplus -> 3
+Oppo -> 4
+Realme -> 5
+Samsung -> 6
+Tecno -> 7
+Vestel -> 8
+Xiaomi -> 9
+
+----------------------------------
+YÜZ TANIMA
+
+Evet -> 0
+Hayır -> 1
